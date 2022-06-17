@@ -1,6 +1,7 @@
 import React from "react";
 import { ScrollView, Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import ContactSection from "./ContactSection";
+import FavouritesSection from "./FavouritesSection";
 import TopicSection from "./TopicSection";
 
 const Home = () => {
@@ -9,6 +10,7 @@ const Home = () => {
 			<View style={styles.mainImage} />
 			<ContactSection />
 			<TopicSection />
+			<FavouritesSection />
 		</ScrollView>
 	);
 };

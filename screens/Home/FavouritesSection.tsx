@@ -1,44 +1,31 @@
 import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { View, StyleSheet, Text, Pressable } from "react-native";
-import TopicIcon from "../../components/TopicIcon";
+import { View, Text, StyleSheet, Pressable } from "react-native";
 import { DrawerParamList } from "../../navigation";
-import { TopicList } from "../../static/TopicList";
 import globalStyles from "../../styles/global";
 
-const TopicSection = () => {
+const FavouritesSection = () => {
 	const navigation = useNavigation<DrawerNavigationProp<DrawerParamList>>();
 	return (
 		<View>
 			<View style={styles.header}>
-				<Text style={globalStyles.h3}>Topics</Text>
+				<Text style={globalStyles.h3}>Favourites</Text>
 				<Pressable
 					style={[
 						globalStyles.ghostButton,
 						{ paddingVertical: 5, paddingHorizontal: 10 },
 					]}
-					onPress={() => navigation.navigate("Topics")}
+					onPress={() => navigation.navigate("Favourites")}
 				>
 					<Text style={[globalStyles.ghostButtonText, { fontSize: 12 }]}>VIEW MORE</Text>
 				</Pressable>
-			</View>
-			<View style={styles.topicsContainer}>
-				{TopicList.map((topic) => (
-					<TopicIcon {...topic} />
-				))}
 			</View>
 		</View>
 	);
 };
 
 const styles = StyleSheet.create({
-	topicsContainer: {
-		display: "flex",
-		flexDirection: "row",
-		flexWrap: "wrap",
-		justifyContent: "space-between",
-	},
 	header: {
 		display: "flex",
 		justifyContent: "space-between",
@@ -48,4 +35,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default TopicSection;
+export default FavouritesSection;

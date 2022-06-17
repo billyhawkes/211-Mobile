@@ -1,7 +1,9 @@
 import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { useNavigation } from "@react-navigation/native";
+import React from "react";
 import { View, StyleSheet, Text, Pressable } from "react-native";
 import { DrawerParamList } from "../navigation";
+import globalStyles from "../styles/global";
 
 export type TopicIcon = {
 	name: string;
@@ -29,13 +31,14 @@ const styles = StyleSheet.create({
 		display: "flex",
 		alignItems: "center",
 		padding: "15px",
-		width: "70%",
+		width: "100%",
 		borderWidth: 1,
 		borderColor: "#aaa",
 		borderRadius: 5,
 	},
 	text: {
 		marginTop: "5px",
+		...globalStyles.p,
 	},
 });
 

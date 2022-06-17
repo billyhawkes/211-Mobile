@@ -1,12 +1,13 @@
 import React from "react";
 import { ScrollView, Text } from "react-native";
+import globalStyles from "../styles/global";
 
-type Props = { name: string };
+const Topic = ({ route, navigation }: any) => {
+	const { name } = route.params;
 
-const Topic = ({ name }: Props) => {
 	return (
 		<ScrollView>
-			<Text>{name}</Text>
+			<Text style={globalStyles.pageTitle}>{name}</Text>
 		</ScrollView>
 	);
 };

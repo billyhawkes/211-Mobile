@@ -28,8 +28,21 @@ const globalStyles = StyleSheet.create({
 		fontWeight: "bold",
 		letterSpacing: 1,
 	},
-	header3: {
-		fontSize: 18,
+	p: {
+		fontFamily: "Lato_500Regular, Helvetica",
+		fontSize: 20,
+	},
+	h3: {
+		fontFamily: "Lato_500Regular, Helvetica",
+		fontSize: 20,
+		fontWeight: "bold",
+	},
+	pageTitle: {
+		fontFamily: "Lato_500Regular, Helvetica",
+		fontSize: 20,
+		fontWeight: "bold",
+		textAlign: "center",
+		marginVertical: "15px",
 	},
 });
 
