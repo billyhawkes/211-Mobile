@@ -1,34 +1,27 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import React, { useState, useEffect } from "react";
-import { ScrollView, Text } from "react-native";
+import React from "react";
+import { ScrollView, Text, View } from "react-native";
 import ServiceItem from "../components/ServiceItem";
+import useFavourites from "../hooks/useFavourites";
 import globalStyles from "../styles/global";
 
 const Favourites = () => {
-	const [favourites, setFavourites] = useState([]);
-
-	const loadFavourites = async () => {
-		try {
-			const jsonValue = await AsyncStorage.getItem("favourites");
-			if (jsonValue != null) {
-				setFavourites(JSON.parse(jsonValue));
-			}
-		} catch (err) {
-			// Error
-		}
-	};
-
-	useEffect(() => {
-		loadFavourites();
-	}, []);
+	const { findFavourites } = useFavourites();
+	const { data: favourites, isLoading } = findFavourites;
 
 	return (
-		<ScrollView>
+		<ScrollView style={{ padding: "15px" }}>
 			<Text style={globalStyles.pageTitle}>Favourites</Text>
 			{favourites &&
-				favourites.map((service: any, index) => (
+				favourites.map((service: any, index: any) => (
 					<ServiceItem key={index} service={service} />
 				))}
+			{isLoading && (
+				<View>
+					{[0, 1, 2, 3, 4, 5, 6, 7].map((key) => (
+						<ServiceItem key={key} service={undefined} />
+					))}
+				</View>
+			)}
 		</ScrollView>
 	);
 };

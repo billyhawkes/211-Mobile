@@ -1,12 +1,11 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { useNavigation } from "@react-navigation/native";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { View, Text, StyleSheet, Animated, Pressable } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import { DrawerParamList } from "../navigation";
 import globalStyles from "../styles/global";
 import { FontAwesome } from "@expo/vector-icons";
+import useFavourites from "../hooks/useFavourites";
 
 type Props = {
 	service?: any;
@@ -14,26 +13,17 @@ type Props = {
 
 const ServiceItem = ({ service }: Props) => {
 	const navigation = useNavigation<DrawerNavigationProp<DrawerParamList>>();
+	const [isFavourite, setIsFavourite] = useState(false);
+	const { findFavourites, addFavourite, removeFavourite } = useFavourites();
+	const { data: favourites } = findFavourites;
+
 	if (!service) {
 		return <ServiceItemSkeleton />;
 	}
 
-	const addFavourite = async (service: any) => {
-		try {
-			const favouritesJSON = await AsyncStorage.getItem("favourites");
-			if (favouritesJSON != null) {
-				let favourites = JSON.parse(favouritesJSON);
-				console.log(favourites);
-				const jsonValue = JSON.stringify([...favourites, service]);
-				await AsyncStorage.setItem("favourites", jsonValue);
-			} else {
-				const jsonValue = JSON.stringify([service]);
-				await AsyncStorage.setItem("favourites", jsonValue);
-			}
-		} catch (err) {
-			// Error
-		}
-	};
+	useEffect(() => {
+		setIsFavourite(!!favourites.find((o: any) => o.id === service.id));
+	}, [favourites]);
 
 	return (
 		<Pressable
@@ -46,9 +36,15 @@ const ServiceItem = ({ service }: Props) => {
 			<Text style={[globalStyles.p, { opacity: 0.7, fontSize: 12, marginTop: "10px" }]}>
 				{service.PhysicalAddressStreet1}
 			</Text>
-			<Pressable style={styles.star} onPress={() => addFavourite(service)}>
-				<FontAwesome name="star-o" size={24} color="black" />
-			</Pressable>
+			{isFavourite ? (
+				<Pressable style={styles.star} onPress={() => removeFavourite.mutate(service)}>
+					<FontAwesome name="star" size={24} color="#FDCC0D" />
+				</Pressable>
+			) : (
+				<Pressable style={styles.star} onPress={() => addFavourite.mutate(service)}>
+					<FontAwesome name="star-o" size={24} color="black"></FontAwesome>
+				</Pressable>
+			)}
 		</Pressable>
 	);
 };
