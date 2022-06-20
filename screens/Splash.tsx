@@ -1,8 +1,12 @@
 import React from "react";
-import { View } from "react-native";
+import { View, Text } from "react-native";
 
 const Splash = () => {
-	return <View>Loading...</View>;
+	return (
+		<View>
+			<Text>Loading...</Text>
+		</View>
+	);
 };
 
 export default Splash;

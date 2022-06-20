@@ -24,8 +24,8 @@ const TopicSection = () => {
 				</Pressable>
 			</View>
 			<View style={styles.topicsContainer}>
-				{TopicList.map((topic) => (
-					<TopicIcon {...topic} />
+				{TopicList.map((topic, index) => (
+					<TopicIcon key={index} {...topic} />
 				))}
 			</View>
 		</View>

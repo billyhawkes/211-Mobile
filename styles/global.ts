@@ -30,7 +30,7 @@ const globalStyles = StyleSheet.create({
 	},
 	p: {
 		fontFamily: "Lato_500Regular, Helvetica",
-		fontSize: 20,
+		fontSize: 14,
 	},
 	h3: {
 		fontFamily: "Lato_500Regular, Helvetica",

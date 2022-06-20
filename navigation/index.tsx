@@ -7,6 +7,7 @@ import Search from "../screens/Search";
 import { mainOptions, pageOptions } from "./ScreenOptions";
 import Topic from "../screens/Topic";
 import Favourites from "../screens/Favourites";
+import Service from "../screens/Service";
 
 export type DrawerParamList = {
 	Home: undefined;
@@ -15,6 +16,9 @@ export type DrawerParamList = {
 	Favourites: undefined;
 	Topic: {
 		name: string;
+	};
+	Service: {
+		service: any;
 	};
 };
 
@@ -34,6 +38,11 @@ const Navigation = () => {
 					<Drawer.Screen
 						name="Topic"
 						component={Topic}
+						options={{ drawerItemStyle: { height: 0 } }}
+					/>
+					<Drawer.Screen
+						name="Service"
+						component={Service}
 						options={{ drawerItemStyle: { height: 0 } }}
 					/>
 				</Drawer.Group>

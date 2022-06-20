@@ -15,7 +15,7 @@ const TopicIcon = ({ name, icon }: TopicIcon) => {
 	return (
 		<Pressable style={styles.container} onPress={() => navigation.navigate("Topic", { name })}>
 			<View style={styles.icon}>{icon}</View>
-			<Text style={styles.text}>{name}</Text>
+			<Text style={[styles.text, globalStyles.p]}>{name}</Text>
 		</Pressable>
 	);
 };
@@ -38,7 +38,6 @@ const styles = StyleSheet.create({
 	},
 	text: {
 		marginTop: "5px",
-		...globalStyles.p,
 	},
 });
 

@@ -9,8 +9,8 @@ const Topics = () => {
 		<ScrollView>
 			<Text style={globalStyles.pageTitle}>Topics</Text>
 			<View style={styles.container}>
-				{TopicList.map((topic) => (
-					<TopicIcon {...topic} />
+				{TopicList.map((topic, index) => (
+					<TopicIcon key={index} {...topic} />
 				))}
 			</View>
 		</ScrollView>
