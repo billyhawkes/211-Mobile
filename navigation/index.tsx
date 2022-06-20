@@ -32,9 +32,9 @@ const Navigation = () => {
 					<Drawer.Screen name="Home" component={Home} />
 					<Drawer.Screen name="Topics" component={Topics} />
 					<Drawer.Screen name="Search" component={Search} />
-					<Drawer.Screen name="Favourites" component={Favourites} />
 				</Drawer.Group>
 				<Drawer.Group screenOptions={pageOptions}>
+					<Drawer.Screen name="Favourites" component={Favourites} />
 					<Drawer.Screen
 						name="Topic"
 						component={Topic}
