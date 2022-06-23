@@ -4,7 +4,7 @@ import React from "react";
 import { View, Text, StyleSheet, Pressable } from "react-native";
 import ServiceItem from "../../components/ServiceItem";
 import useFavourites from "../../hooks/useFavourites";
-import { DrawerParamList } from "../../navigation";
+import { DrawerParamList } from "../../../navigation";
 import globalStyles from "../../styles/global";
 
 const FavouritesSection = () => {

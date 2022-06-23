@@ -3,7 +3,7 @@ import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { View, StyleSheet, Text, Pressable } from "react-native";
 import TopicIcon from "../../components/TopicIcon";
-import { DrawerParamList } from "../../navigation";
+import { DrawerParamList } from "../../../navigation";
 import { TopicList } from "../../static/TopicList";
 import globalStyles from "../../styles/global";
 
@@ -24,7 +24,7 @@ const TopicSection = () => {
 				</Pressable>
 			</View>
 			<View style={styles.topicsContainer}>
-				{TopicList.map((topic, index) => (
+				{TopicList.slice(0, 6).map((topic, index) => (
 					<TopicIcon key={index} {...topic} />
 				))}
 			</View>

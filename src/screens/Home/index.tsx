@@ -1,13 +1,16 @@
 import React from "react";
-import { ScrollView, Text, View, StyleSheet, TouchableOpacity } from "react-native";
+import { ScrollView, Text, View, StyleSheet, TouchableOpacity, Image } from "react-native";
 import ContactSection from "./ContactSection";
 import FavouritesSection from "./FavouritesSection";
 import TopicSection from "./TopicSection";
+import homeImage from "../../assets/home-image-undraw.svg";
+import colors from "../../styles/colors";
 
 const Home = () => {
 	return (
 		<ScrollView style={styles.container}>
-			<View style={styles.mainImage} />
+			<Image style={styles.mainImage} source={homeImage} />
+			<View style={styles.divider} />
 			<ContactSection />
 			<TopicSection />
 			<FavouritesSection />
@@ -19,10 +22,17 @@ const styles = StyleSheet.create({
 	container: {
 		padding: "15px",
 	},
-	mainImage: {
-		backgroundColor: "#aaaaaa",
+	divider: {
 		width: "100%",
-		height: "200px",
+		margin: "auto",
+		height: "4px",
+		backgroundColor: "#2f2e41",
+		borderRadius: 3,
+	},
+	mainImage: {
+		width: "100%",
+		height: "210px",
+		resizeMode: "contain",
 	},
 });
 

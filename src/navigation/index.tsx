@@ -8,6 +8,7 @@ import { mainOptions, pageOptions } from "./ScreenOptions";
 import Topic from "../screens/Topic";
 import Favourites from "../screens/Favourites";
 import Service from "../screens/Service";
+import DrawerContent from "./DrawerContent";
 
 export type DrawerParamList = {
 	Home: undefined;
@@ -27,13 +28,18 @@ const Drawer = createDrawerNavigator<DrawerParamList>();
 const Navigation = () => {
 	return (
 		<NavigationContainer>
-			<Drawer.Navigator useLegacyImplementation initialRouteName="Home">
+			<Drawer.Navigator
+				drawerContent={(props) => <DrawerContent {...props} />}
+				useLegacyImplementation
+				initialRouteName="Home"
+				backBehavior="history"
+			>
 				<Drawer.Group screenOptions={mainOptions}>
 					<Drawer.Screen name="Home" component={Home} />
-					<Drawer.Screen name="Topics" component={Topics} />
-					<Drawer.Screen name="Search" component={Search} />
 				</Drawer.Group>
 				<Drawer.Group screenOptions={pageOptions}>
+					<Drawer.Screen name="Topics" component={Topics} />
+					<Drawer.Screen name="Search" component={Search} />
 					<Drawer.Screen name="Favourites" component={Favourites} />
 					<Drawer.Screen
 						name="Topic"

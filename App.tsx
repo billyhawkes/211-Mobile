@@ -1,10 +1,9 @@
 import { useFonts, Lato_400Regular } from "@expo-google-fonts/lato";
-import React, { useEffect } from "react";
+import React from "react";
 import "react-native-gesture-handler";
 import { QueryClient, QueryClientProvider } from "react-query";
-import useFavourites from "./hooks/useFavourites";
-import Navigation from "./navigation";
-import Splash from "./screens/Splash";
+import Navigation from "./src/navigation";
+import Splash from "./src/screens/Splash";
 
 export default function App() {
 	const queryClient = new QueryClient();

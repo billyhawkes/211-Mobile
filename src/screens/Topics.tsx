@@ -12,6 +12,7 @@ const Topics = () => {
 				{TopicList.map((topic, index) => (
 					<TopicIcon key={index} {...topic} />
 				))}
+				<View style={{ width: "30%" }} />
 			</View>
 		</ScrollView>
 	);
