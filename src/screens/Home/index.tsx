@@ -3,8 +3,7 @@ import { ScrollView, Text, View, StyleSheet, TouchableOpacity, Image } from "rea
 import ContactSection from "./ContactSection";
 import FavouritesSection from "./FavouritesSection";
 import TopicSection from "./TopicSection";
-import homeImage from "../../assets/home-image-undraw.svg";
-import colors from "../../styles/colors";
+import homeImage from "../../assets/images/home-image-undraw.svg";
 
 const Home = () => {
 	return (

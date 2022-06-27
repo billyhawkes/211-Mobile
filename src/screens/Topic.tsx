@@ -1,15 +1,16 @@
 import React, { useEffect, useRef } from "react";
 import { ScrollView, Text, StyleSheet, View, Animated } from "react-native";
 import ServiceItem from "../components/ServiceItem";
+import useLocation from "../hooks/useLocation";
 import useTopic from "../hooks/useTopic";
 import colors from "../styles/colors";
 import globalStyles from "../styles/global";
 
-const Topic = ({ route, navigation }: any) => {
+const Topic = ({ route }: any) => {
 	const { name } = route.params;
 	const { searchTopic } = useTopic();
-
-	const { data, isLoading } = searchTopic(name);
+	const { location } = useLocation();
+	const { data, isLoading } = searchTopic(name, location);
 
 	return (
 		<ScrollView>

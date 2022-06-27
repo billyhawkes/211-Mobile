@@ -3,9 +3,9 @@ import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { View, StyleSheet, Text, Pressable } from "react-native";
 import TopicIcon from "../../components/TopicIcon";
-import { DrawerParamList } from "../../../navigation";
-import { TopicList } from "../../static/TopicList";
+import { TopicList } from "../../assets/data/TopicList";
 import globalStyles from "../../styles/global";
+import { DrawerParamList } from "../../navigation";
 
 const TopicSection = () => {
 	const navigation = useNavigation<DrawerNavigationProp<DrawerParamList>>();

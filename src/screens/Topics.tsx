@@ -1,7 +1,7 @@
 import React from "react";
 import { ScrollView, Text, View, StyleSheet } from "react-native";
 import TopicIcon from "../components/TopicIcon";
-import { TopicList } from "../static/TopicList";
+import { TopicList } from "../assets/data/TopicList";
 import globalStyles from "../styles/global";
 
 const Topics = () => {

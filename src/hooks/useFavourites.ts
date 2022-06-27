@@ -2,36 +2,24 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
 const loadFavouritesQuery = async () => {
-	try {
-		const jsonValue = await AsyncStorage.getItem("favourites");
-		return jsonValue != null ? JSON.parse(jsonValue) : [];
-	} catch (err) {
-		// Error
-	}
+	const jsonValue = await AsyncStorage.getItem("favourites");
+	return jsonValue != null ? JSON.parse(jsonValue) : [];
 };
 
 const addFavouriteMutation = async (service: any) => {
-	try {
-		const jsonValue = await AsyncStorage.getItem("favourites");
-		const favourites = jsonValue != null ? JSON.parse(jsonValue) : [];
-		const newFavourites = JSON.stringify([...favourites, service]);
-		await AsyncStorage.setItem("favourites", newFavourites);
-		return service;
-	} catch (err) {
-		// Error
-	}
+	const jsonValue = await AsyncStorage.getItem("favourites");
+	const favourites = jsonValue != null ? JSON.parse(jsonValue) : [];
+	const newFavourites = JSON.stringify([...favourites, service]);
+	await AsyncStorage.setItem("favourites", newFavourites);
+	return service;
 };
 
 const removeFavouriteMutation = async (service: any) => {
-	try {
-		const jsonValue = await AsyncStorage.getItem("favourites");
-		const favourites = jsonValue != null ? JSON.parse(jsonValue) : [];
-		const newFavourites = JSON.stringify(favourites.filter((s: any) => s.id !== service.id));
-		await AsyncStorage.setItem("favourites", newFavourites);
-		return service;
-	} catch (err) {
-		// Error
-	}
+	const jsonValue = await AsyncStorage.getItem("favourites");
+	const favourites = jsonValue != null ? JSON.parse(jsonValue) : [];
+	const newFavourites = JSON.stringify(favourites.filter((s: any) => s.id !== service.id));
+	await AsyncStorage.setItem("favourites", newFavourites);
+	return service;
 };
 
 const useFavourites = () => {

@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
 	container: {
 		width: "100%",
 		boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25);",
-		padding: "20px",
+		padding: "15px",
 		paddingRight: "40px",
 		marginBottom: "15px",
 		borderRadius: 5,

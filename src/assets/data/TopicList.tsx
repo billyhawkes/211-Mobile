@@ -1,6 +1,6 @@
-import { TopicIcon } from "../components/TopicIcon";
+import { TopicIcon } from "../../components/TopicIcon";
 import { FontAwesome5 } from "@expo/vector-icons";
-import colors from "../styles/colors";
+import colors from "../../styles/colors";
 
 export const TopicList: TopicIcon[] = [
 	{ name: "Food", icon: <FontAwesome5 name="bread-slice" size={24} color={colors.primary} /> },
