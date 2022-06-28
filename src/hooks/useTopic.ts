@@ -1,5 +1,6 @@
 import { useQuery, useQueryClient } from "react-query";
 import { UserLocation } from "./useLocation";
+import "dotenv/config";
 
 type SearchResponse = {
 	RecordCount: number;
@@ -11,7 +12,7 @@ const searchTopicRequest = async (
 	location: UserLocation | undefined
 ): Promise<SearchResponse> => {
 	const res = await fetch(
-		"https://data.211support.org/api/v2/search?key=79KQMx58rw1hmqX3U6VyYGeIgWtjHB4LDSsnAzOFfJulapZP2ic0TkCEodbNvR",
+		`https://data.211support.org/api/v2/search?key=${process.env.API_KEY_211}`,
 		{
 			method: "Post",
 			headers: { Accept: "application/json", "Content-Type": "application/json" },
