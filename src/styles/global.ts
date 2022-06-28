@@ -1,12 +1,12 @@
 import { StyleSheet } from "react-native";
-import colors from "./colors";
+import theme from "./theme";
 
 const globalStyles = StyleSheet.create({
 	button: {
-		backgroundColor: colors.primary,
+		backgroundColor: theme.colors.primary,
 		borderRadius: 5,
-		paddingHorizontal: "15px",
-		paddingVertical: "10px",
+		paddingHorizontal: 15,
+		paddingVertical: 10,
 		textAlign: "center",
 	},
 	buttonText: {
@@ -16,15 +16,15 @@ const globalStyles = StyleSheet.create({
 	},
 	ghostButton: {
 		backgroundColor: "#ffffff",
-		borderColor: colors.primary,
+		borderColor: theme.colors.primary,
 		borderWidth: 1,
 		borderRadius: 5,
-		paddingHorizontal: "15px",
-		paddingVertical: "10px",
+		paddingHorizontal: 15,
+		paddingVertical: 10,
 		textAlign: "center",
 	},
 	ghostButtonText: {
-		color: colors.primary,
+		color: theme.colors.primary,
 		fontWeight: "bold",
 		letterSpacing: 1,
 	},
@@ -42,7 +42,7 @@ const globalStyles = StyleSheet.create({
 		fontSize: 20,
 		fontWeight: "bold",
 		textAlign: "center",
-		marginVertical: "15px",
+		marginVertical: 15,
 	},
 });
 

@@ -1,26 +1,33 @@
 import React from "react";
-import { TouchableOpacity, View, Text, StyleSheet } from "react-native";
-import globalStyles from "../../styles/global";
+import { View, StyleSheet } from "react-native";
+import Button from "../../components/common/Button";
+import theme from "../../styles/theme";
 
 const ContactSection = () => {
 	return (
 		<View style={styles.container}>
-			<TouchableOpacity style={[globalStyles.button, { flexGrow: 1, marginRight: "15px" }]}>
-				<Text style={globalStyles.buttonText}>CALL 2-1-1</Text>
-			</TouchableOpacity>
-			<TouchableOpacity style={[globalStyles.button, { flexGrow: 1 }]}>
-				<Text style={globalStyles.buttonText}>TEXT 2-1-1</Text>
-			</TouchableOpacity>
+			<Button
+				primary
+				onPress={() => {}}
+				style={{ marginRight: theme.spacing["md"], flex: 1 }}
+			>
+				CALL 2-1-1
+			</Button>
+			<Button primary onPress={() => {}} style={{ flex: 1 }}>
+				TEXT 2-1-1
+			</Button>
 		</View>
 	);
 };
 
 const styles = StyleSheet.create({
 	container: {
+		position: "relative",
 		width: "100%",
 		display: "flex",
 		flexDirection: "row",
-		marginVertical: "15px",
+		marginVertical: 15,
+		justifyContent: "space-between",
 	},
 });
 

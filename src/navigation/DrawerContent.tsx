@@ -2,7 +2,7 @@ import { DrawerContentScrollView, DrawerItem, DrawerItemList } from "@react-navi
 import React from "react";
 import { Linking, View, StyleSheet, Text } from "react-native";
 import LanguageToggle from "../components/LanguageToggle";
-import colors from "../styles/colors";
+import colors from "../styles/theme";
 
 const DrawerContent = (props: any) => {
 	return (
@@ -14,7 +14,7 @@ const DrawerContent = (props: any) => {
 
 const styles = StyleSheet.create({
 	container: {
-		padding: "15px",
+		padding: 15,
 	},
 });
 

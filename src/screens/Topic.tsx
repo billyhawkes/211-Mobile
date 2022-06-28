@@ -1,10 +1,10 @@
-import React, { useEffect, useRef } from "react";
-import { ScrollView, Text, StyleSheet, View, Animated } from "react-native";
+import React from "react";
+import { ScrollView, Text, StyleSheet, View } from "react-native";
 import ServiceItem from "../components/ServiceItem";
 import useLocation from "../hooks/useLocation";
 import useTopic from "../hooks/useTopic";
-import colors from "../styles/colors";
 import globalStyles from "../styles/global";
+import theme from "../styles/theme";
 
 const Topic = ({ route }: any) => {
 	const { name } = route.params;
@@ -35,8 +35,8 @@ const Topic = ({ route }: any) => {
 
 const styles = StyleSheet.create({
 	container: {
-		padding: "15px",
-		backgroundColor: colors.background,
+		padding: 15,
+		backgroundColor: theme.colors.background,
 	},
 });
 

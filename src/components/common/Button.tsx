@@ -1,21 +1,30 @@
-import { Pressable, StyleSheet, Text } from "react-native";
-import colors from "../../styles/colors";
+import { Pressable, StyleProp, StyleSheet, Text, ViewStyle } from "react-native";
+import theme from "../../styles/theme";
 
 type Props = {
 	onPress: () => any;
-	children: JSX.Element;
-	primary: boolean;
+	primary?: boolean;
+	size?: "sm" | "md" | "lg";
+	children: JSX.Element | string;
+	style?: StyleProp<ViewStyle>;
 };
 
-const Button = ({ onPress, children, primary }: Props) => {
+const Button = ({ onPress, children, primary = false, size = "md", style }: Props) => {
+	const container = [
+		styles.container,
+		primary ? styles.primaryContainer : styles.ghostContainer,
+		{ paddingHorizontal: theme.spacing[size] * 2, paddingVertical: theme.spacing[size] },
+		style,
+	];
+	const text = [
+		styles.text,
+		primary ? styles.primaryText : styles.ghostText,
+		theme.textVariants[size],
+	];
+
 	return (
-		<Pressable
-			style={[styles.container, primary ? styles.primaryContainer : styles.ghostContainer]}
-			onPress={onPress}
-		>
-			<Text style={[styles.text, primary ? styles.primaryText : styles.ghostText]}>
-				{children}
-			</Text>
+		<Pressable style={container} onPress={onPress}>
+			<Text style={text}>{children}</Text>
 		</Pressable>
 	);
 };
@@ -23,17 +32,15 @@ const Button = ({ onPress, children, primary }: Props) => {
 const styles = StyleSheet.create({
 	container: {
 		borderRadius: 5,
-		paddingHorizontal: "15px",
-		paddingVertical: "10px",
 		textAlign: "center",
 	},
 	primaryContainer: {
-		backgroundColor: colors.primary,
+		backgroundColor: theme.colors.primary,
 	},
 	ghostContainer: {
-		backgroundColor: colors.background,
-		borderColor: colors.primary,
-		borderWidth: 2,
+		backgroundColor: theme.colors.background,
+		borderColor: theme.colors.primary,
+		borderWidth: 1,
 	},
 	text: {
 		fontWeight: "bold",
@@ -43,7 +50,7 @@ const styles = StyleSheet.create({
 		color: "#ffffff",
 	},
 	ghostText: {
-		color: colors.primary,
+		color: theme.colors.primary,
 	},
 });
 

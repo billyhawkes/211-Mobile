@@ -6,6 +6,7 @@ import TopicIcon from "../../components/TopicIcon";
 import { TopicList } from "../../assets/data/TopicList";
 import globalStyles from "../../styles/global";
 import { DrawerParamList } from "../../navigation";
+import Button from "../../components/common/Button";
 
 const TopicSection = () => {
 	const navigation = useNavigation<DrawerNavigationProp<DrawerParamList>>();
@@ -13,15 +14,9 @@ const TopicSection = () => {
 		<View>
 			<View style={styles.header}>
 				<Text style={globalStyles.h3}>Topics</Text>
-				<Pressable
-					style={[
-						globalStyles.ghostButton,
-						{ paddingVertical: 5, paddingHorizontal: 10 },
-					]}
-					onPress={() => navigation.navigate("Topics")}
-				>
-					<Text style={[globalStyles.ghostButtonText, { fontSize: 12 }]}>VIEW MORE</Text>
-				</Pressable>
+				<Button size="sm" onPress={() => navigation.navigate("Topics")}>
+					VIEW MORE
+				</Button>
 			</View>
 			<View style={styles.topicsContainer}>
 				{TopicList.slice(0, 6).map((topic, index) => (

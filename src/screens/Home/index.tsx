@@ -19,18 +19,18 @@ const Home = () => {
 
 const styles = StyleSheet.create({
 	container: {
-		padding: "15px",
+		padding: 15,
 	},
 	divider: {
 		width: "100%",
 		margin: "auto",
-		height: "4px",
+		height: 4,
 		backgroundColor: "#2f2e41",
 		borderRadius: 3,
 	},
 	mainImage: {
 		width: "100%",
-		height: "210px",
+		height: 210,
 		resizeMode: "contain",
 	},
 });

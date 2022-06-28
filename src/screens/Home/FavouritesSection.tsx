@@ -2,9 +2,10 @@ import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { View, Text, StyleSheet, Pressable } from "react-native";
+import Button from "../../components/common/Button";
 import ServiceItem from "../../components/ServiceItem";
 import useFavourites from "../../hooks/useFavourites";
-import { DrawerParamList } from "../../../navigation";
+import { DrawerParamList } from "../../navigation";
 import globalStyles from "../../styles/global";
 
 const FavouritesSection = () => {
@@ -16,15 +17,9 @@ const FavouritesSection = () => {
 		<View>
 			<View style={styles.header}>
 				<Text style={globalStyles.h3}>Favourites</Text>
-				<Pressable
-					style={[
-						globalStyles.ghostButton,
-						{ paddingVertical: 5, paddingHorizontal: 10 },
-					]}
-					onPress={() => navigation.navigate("Favourites")}
-				>
-					<Text style={[globalStyles.ghostButtonText, { fontSize: 12 }]}>VIEW MORE</Text>
-				</Pressable>
+				<Button size="sm" onPress={() => navigation.navigate("Favourites")}>
+					VIEW MORE
+				</Button>
 			</View>
 			{favourites &&
 				favourites

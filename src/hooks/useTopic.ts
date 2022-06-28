@@ -1,6 +1,5 @@
-import { useQuery, useQueryClient } from "react-query";
+import { useQuery } from "react-query";
 import { UserLocation } from "./useLocation";
-import "dotenv/config";
 
 type SearchResponse = {
 	RecordCount: number;

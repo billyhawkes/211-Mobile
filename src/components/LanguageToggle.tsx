@@ -1,14 +1,11 @@
 import React from "react";
-import { Pressable, View, Text } from "react-native";
+import { View } from "react-native";
+import Button from "./common/Button";
 
 const LanguageToggle = () => (
 	<View>
-		<Pressable>
-			<Text>EN</Text>
-		</Pressable>
-		<Pressable>
-			<Text>FR</Text>
-		</Pressable>
+		<Button onPress={() => {}}>EN</Button>
+		<Button onPress={() => {}}>FR</Button>
 	</View>
 );
 

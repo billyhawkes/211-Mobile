@@ -3,7 +3,7 @@ import { DrawerNavigationOptions } from "@react-navigation/drawer";
 import { RouteProp } from "@react-navigation/native";
 import { Pressable } from "react-native";
 import { DrawerParamList } from ".";
-import colors from "../styles/colors";
+import theme from "../styles/theme";
 
 export const mainOptions:
 	| DrawerNavigationOptions
@@ -24,7 +24,7 @@ export const mainOptions:
 		</Pressable>
 	),
 	drawerActiveTintColor: "#ffffff",
-	drawerActiveBackgroundColor: colors.primary,
+	drawerActiveBackgroundColor: theme.colors.primary,
 });
 
 export const pageOptions:

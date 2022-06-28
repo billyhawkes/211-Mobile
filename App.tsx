@@ -1,4 +1,3 @@
-import "dotenv/config";
 import { useFonts, Lato_400Regular } from "@expo-google-fonts/lato";
 import StorybookUI from "./storybook";
 import React from "react";
