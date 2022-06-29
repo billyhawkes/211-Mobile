@@ -1,28 +1,28 @@
-import { useFonts, Lato_400Regular } from "@expo-google-fonts/lato";
+import "react-native-gesture-handler";
 import StorybookUI from "./storybook";
 import React from "react";
-import "react-native-gesture-handler";
 import { QueryClient, QueryClientProvider } from "react-query";
 import useLocation from "./src/hooks/useLocation";
 import Navigation from "./src/navigation";
-import Splash from "./src/screens/Splash";
+import useLoadResources from "./src/hooks/useLoadResources";
+import { View } from "react-native";
 
 const App = () => {
-	const queryClient = new QueryClient();
+	const { resLoaded, onLayoutRootView } = useLoadResources();
 	useLocation();
-	let [fontsLoaded] = useFonts({
-		Lato_400Regular,
-	});
+	const queryClient = new QueryClient();
 
-	if (!fontsLoaded) {
-		return <Splash />;
+	if (!resLoaded) {
+		return null;
 	}
 
 	return (
 		<QueryClientProvider client={queryClient}>
-			<Navigation />
+			<View style={{ flex: 1 }} onLayout={onLayoutRootView}>
+				<Navigation />
+			</View>
 		</QueryClientProvider>
 	);
 };
 
-export default process.env.LOAD_STORYBOOK === "true" ? StorybookUI : App;
+export default false ? StorybookUI : App;

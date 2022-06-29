@@ -2,12 +2,12 @@ import React from "react";
 import { ScrollView, Text, View, StyleSheet } from "react-native";
 import TopicIcon from "../components/TopicIcon";
 import { TopicList } from "../assets/data/TopicList";
-import globalStyles from "../styles/global";
+import ScreenTitle from "../components/common/ScreenTitle";
 
 const Topics = () => {
 	return (
 		<ScrollView>
-			<Text style={globalStyles.pageTitle}>Topics</Text>
+			<ScreenTitle name="Topics" />
 			<View style={styles.container}>
 				{TopicList.map((topic, index) => (
 					<TopicIcon key={index} {...topic} />
@@ -20,7 +20,7 @@ const Topics = () => {
 
 const styles = StyleSheet.create({
 	container: {
-		padding: "15px",
+		padding: 15,
 		display: "flex",
 		flexDirection: "row",
 		flexWrap: "wrap",

@@ -3,7 +3,7 @@ import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { View, StyleSheet, Text, Pressable } from "react-native";
 import { DrawerParamList } from "../navigation";
-import globalStyles from "../styles/global";
+import theme from "../styles/theme";
 
 export type TopicIcon = {
 	name: string;
@@ -15,7 +15,7 @@ const TopicIcon = ({ name, icon }: TopicIcon) => {
 	return (
 		<Pressable style={styles.container} onPress={() => navigation.navigate("Topic", { name })}>
 			<View style={styles.icon}>{icon}</View>
-			<Text style={[styles.text, globalStyles.p]}>{name}</Text>
+			<Text style={[theme.textVariants.md, styles.text]}>{name}</Text>
 		</Pressable>
 	);
 };
@@ -25,19 +25,19 @@ const styles = StyleSheet.create({
 		width: "30%",
 		display: "flex",
 		alignItems: "center",
-		marginBottom: "15px",
+		marginBottom: 15,
 	},
 	icon: {
 		display: "flex",
 		alignItems: "center",
-		padding: "15px",
+		padding: 15,
 		width: "100%",
 		borderWidth: 1,
 		borderColor: "#aaa",
 		borderRadius: 5,
 	},
 	text: {
-		marginTop: "5px",
+		marginTop: 5,
 		textAlign: "center",
 	},
 });

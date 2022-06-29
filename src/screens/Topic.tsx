@@ -1,9 +1,9 @@
 import React from "react";
 import { ScrollView, Text, StyleSheet, View } from "react-native";
+import ScreenTitle from "../components/common/ScreenTitle";
 import ServiceItem from "../components/ServiceItem";
 import useLocation from "../hooks/useLocation";
 import useTopic from "../hooks/useTopic";
-import globalStyles from "../styles/global";
 import theme from "../styles/theme";
 
 const Topic = ({ route }: any) => {
@@ -15,8 +15,8 @@ const Topic = ({ route }: any) => {
 	return (
 		<ScrollView>
 			<View style={styles.container}>
-				<Text style={globalStyles.pageTitle}>{name}</Text>
-				{data && <Text style={globalStyles.p}>{data.RecordCount} records</Text>}
+				<ScreenTitle name={name} />
+				{data && <Text>{data.RecordCount} records</Text>}
 				{data &&
 					data.Records.map((service: any, index) => (
 						<ServiceItem key={index} service={service} />

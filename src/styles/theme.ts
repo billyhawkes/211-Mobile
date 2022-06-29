@@ -11,17 +11,17 @@ const theme = {
 	},
 	textVariants: {
 		sm: {
-			fontFamily: "Lato_500Regular, Helvetica",
+			fontFamily: "Lato",
 			fontSize: 12,
 			lineHeight: 16,
 		},
 		md: {
-			fontFamily: "Lato_500Regular, Helvetica",
+			fontFamily: "Lato",
 			fontSize: 14,
 			lineHeight: 20,
 		},
 		lg: {
-			fontFamily: "Lato_500Regular, Helvetica",
+			fontFamily: "Lato",
 			fontSize: 16,
 			lineHeight: 24,
 		},

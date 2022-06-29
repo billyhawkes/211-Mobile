@@ -1,14 +1,14 @@
 import React from "react";
-import { ScrollView, Text, View, StyleSheet, TouchableOpacity, Image } from "react-native";
+import { ScrollView, View, StyleSheet, Image } from "react-native";
 import ContactSection from "./ContactSection";
 import FavouritesSection from "./FavouritesSection";
 import TopicSection from "./TopicSection";
-import homeImage from "../../assets/images/home-image-undraw.svg";
+import HomeImage from "../../assets/images/home-image-undraw.svg";
 
 const Home = () => {
 	return (
 		<ScrollView style={styles.container}>
-			<Image style={styles.mainImage} source={homeImage} />
+			<HomeImage width="100%" height={210} style={{ marginTop: 15 }} />
 			<View style={styles.divider} />
 			<ContactSection />
 			<TopicSection />
@@ -19,7 +19,7 @@ const Home = () => {
 
 const styles = StyleSheet.create({
 	container: {
-		padding: 15,
+		paddingHorizontal: 15,
 	},
 	divider: {
 		width: "100%",
@@ -27,11 +27,6 @@ const styles = StyleSheet.create({
 		height: 4,
 		backgroundColor: "#2f2e41",
 		borderRadius: 3,
-	},
-	mainImage: {
-		width: "100%",
-		height: 210,
-		resizeMode: "contain",
 	},
 });
 

@@ -1,1 +1,2 @@
-import "./Button.stories.js";
+import "./Button.stories";
+import "./ServiceItem.stories";

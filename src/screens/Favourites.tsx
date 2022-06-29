@@ -1,16 +1,16 @@
 import React from "react";
 import { ScrollView, Text, View } from "react-native";
+import ScreenTitle from "../components/common/ScreenTitle";
 import ServiceItem from "../components/ServiceItem";
 import useFavourites from "../hooks/useFavourites";
-import globalStyles from "../styles/global";
 
 const Favourites = () => {
 	const { findFavourites } = useFavourites();
 	const { data: favourites, isLoading } = findFavourites;
 
 	return (
-		<ScrollView style={{ padding: "15px" }}>
-			<Text style={globalStyles.pageTitle}>Favourites</Text>
+		<ScrollView style={{ padding: 15 }}>
+			<ScreenTitle name="Favourites" />
 			{favourites &&
 				favourites.map((service: any, index: any) => (
 					<ServiceItem key={index} service={service} />

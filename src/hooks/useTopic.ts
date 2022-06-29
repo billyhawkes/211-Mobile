@@ -1,5 +1,6 @@
 import { useQuery } from "react-query";
 import { UserLocation } from "./useLocation";
+import { API_KEY_211 } from "@env";
 
 type SearchResponse = {
 	RecordCount: number;
@@ -10,24 +11,21 @@ const searchTopicRequest = async (
 	topic: string,
 	location: UserLocation | undefined
 ): Promise<SearchResponse> => {
-	const res = await fetch(
-		`https://data.211support.org/api/v2/search?key=${process.env.API_KEY_211}`,
-		{
-			method: "Post",
-			headers: { Accept: "application/json", "Content-Type": "application/json" },
-			body: JSON.stringify({
-				Dataset: "on",
-				Lang: "en",
-				SearchType: "proximity",
-				Latitude: location?.latitude || 48.461312,
-				Longitude: location?.longitude || -89.228477,
-				Distance: 10,
-				Search: "match",
-				MatchMode: "taxterm",
-				MatchTerms: topic,
-			}),
-		}
-	);
+	const res = await fetch(`https://data.211support.org/api/v2/search?key=${API_KEY_211}`, {
+		method: "Post",
+		headers: { Accept: "application/json", "Content-Type": "application/json" },
+		body: JSON.stringify({
+			Dataset: "on",
+			Lang: "en",
+			SearchType: "proximity",
+			Latitude: location?.latitude || 48.461312,
+			Longitude: location?.longitude || -89.228477,
+			Distance: 10,
+			Search: "match",
+			MatchMode: "taxterm",
+			MatchTerms: topic,
+		}),
+	});
 	const data: SearchResponse = await res.json();
 	return data;
 };

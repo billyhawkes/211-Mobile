@@ -6,7 +6,7 @@ import Button from "../../components/common/Button";
 import ServiceItem from "../../components/ServiceItem";
 import useFavourites from "../../hooks/useFavourites";
 import { DrawerParamList } from "../../navigation";
-import globalStyles from "../../styles/global";
+import theme from "../../styles/theme";
 
 const FavouritesSection = () => {
 	const navigation = useNavigation<DrawerNavigationProp<DrawerParamList>>();
@@ -16,7 +16,7 @@ const FavouritesSection = () => {
 	return (
 		<View>
 			<View style={styles.header}>
-				<Text style={globalStyles.h3}>Favourites</Text>
+				<Text style={theme.textVariants.lg}>Favourites</Text>
 				<Button size="sm" onPress={() => navigation.navigate("Favourites")}>
 					VIEW MORE
 				</Button>
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
 		justifyContent: "space-between",
 		alignItems: "center",
 		flexDirection: "row",
-		marginBottom: "20px",
+		marginBottom: 20,
 	},
 });
 

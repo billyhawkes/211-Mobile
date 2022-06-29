@@ -3,7 +3,6 @@ import { useNavigation } from "@react-navigation/native";
 import React, { useEffect, useRef, useState } from "react";
 import { View, Text, StyleSheet, Animated, Pressable } from "react-native";
 import { DrawerParamList } from "../navigation";
-import globalStyles from "../styles/global";
 import { FontAwesome } from "@expo/vector-icons";
 import useFavourites from "../hooks/useFavourites";
 
@@ -30,10 +29,10 @@ const ServiceItem = ({ service }: Props) => {
 			onPress={() => navigation.navigate("Service", { service })}
 			style={styles.container}
 		>
-			<Text style={[globalStyles.p, { fontWeight: "bold" }]} numberOfLines={1}>
+			<Text style={[{ fontWeight: "bold" }]} numberOfLines={1}>
 				{service.PublicName}
 			</Text>
-			<Text style={[globalStyles.p, { opacity: 0.7, fontSize: 12, marginTop: "10px" }]}>
+			<Text style={[{ opacity: 0.7, fontSize: 12, marginTop: 10 }]}>
 				{service.PhysicalAddressStreet1}
 			</Text>
 			{isFavourite ? (
@@ -75,7 +74,7 @@ const ServiceItemSkeleton = () => {
 			<Animated.View
 				style={[
 					styles.skeleton,
-					{ height: "10px", width: "40%", opacity: opacity as any, marginTop: "10px" },
+					{ height: 10, width: "40%", opacity: opacity as any, marginTop: 10 },
 				]}
 			/>
 		</View>
@@ -85,28 +84,30 @@ const ServiceItemSkeleton = () => {
 const styles = StyleSheet.create({
 	container: {
 		width: "100%",
-		boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25);",
-		padding: "15px",
-		paddingRight: "40px",
-		marginBottom: "15px",
+		padding: 15,
+		paddingRight: 40,
+		marginBottom: 15,
 		borderRadius: 5,
+		borderWidth: 1,
+		borderColor: "#ccc",
 	},
 	skeletonContainer: {
 		width: "100%",
-		boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25);",
-		padding: "20px",
-		marginBottom: "15px",
+		padding: 20,
+		marginBottom: 15,
 		borderRadius: 5,
+		borderWidth: 1,
+		borderColor: "#ccc",
 	},
 	star: {
 		position: "absolute",
 		right: 0,
 		top: 0,
-		padding: "10px",
+		padding: 10,
 	},
 	skeleton: {
 		width: "100%",
-		height: "15px",
+		height: 15,
 		backgroundColor: "#999",
 		borderRadius: 5,
 	},

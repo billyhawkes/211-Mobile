@@ -32,17 +32,16 @@ const Button = ({ onPress, children, primary = false, size = "md", style }: Prop
 const styles = StyleSheet.create({
 	container: {
 		borderRadius: 5,
-		textAlign: "center",
 	},
 	primaryContainer: {
 		backgroundColor: theme.colors.primary,
 	},
 	ghostContainer: {
-		backgroundColor: theme.colors.background,
 		borderColor: theme.colors.primary,
 		borderWidth: 1,
 	},
 	text: {
+		textAlign: "center",
 		fontWeight: "bold",
 		letterSpacing: 2,
 	},
