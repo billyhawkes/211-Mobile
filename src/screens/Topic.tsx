@@ -1,14 +1,13 @@
 import React from "react";
-import { ScrollView, Text, StyleSheet, View } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 import ScreenTitle from "../components/common/ScreenTitle";
-import ServiceItem from "../components/ServiceItem";
+import ServiceList from "../components/service/ServiceList";
 import useLocation from "../hooks/useLocation";
-import useTopic from "../hooks/useTopic";
-import theme from "../styles/theme";
+import useSearch from "../hooks/useSearch";
 
 const Topic = ({ route }: any) => {
 	const { name } = route.params;
-	const { searchTopic } = useTopic();
+	const { searchTopic } = useSearch();
 	const { location } = useLocation();
 	const { data, isLoading } = searchTopic(name, location);
 
@@ -16,18 +15,7 @@ const Topic = ({ route }: any) => {
 		<ScrollView>
 			<View style={styles.container}>
 				<ScreenTitle name={name} />
-				{data && <Text>{data.RecordCount} records</Text>}
-				{data &&
-					data.Records.map((service: any, index) => (
-						<ServiceItem key={index} service={service} />
-					))}
-				{isLoading && (
-					<View style={{ paddingTop: 18 }}>
-						{[0, 1, 2, 3, 4, 5, 6, 7].map((key) => (
-							<ServiceItem key={key} service={undefined} />
-						))}
-					</View>
-				)}
+				<ServiceList services={data?.Records} isLoading={isLoading} numItems={10} />
 			</View>
 		</ScrollView>
 	);
@@ -36,7 +24,6 @@ const Topic = ({ route }: any) => {
 const styles = StyleSheet.create({
 	container: {
 		padding: 15,
-		backgroundColor: theme.colors.background,
 	},
 });
 

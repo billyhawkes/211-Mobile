@@ -1,9 +1,9 @@
 import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { View, Text, StyleSheet, Pressable } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import Button from "../../components/common/Button";
-import ServiceItem from "../../components/ServiceItem";
+import ServiceList from "../../components/service/ServiceList";
 import useFavourites from "../../hooks/useFavourites";
 import { DrawerParamList } from "../../navigation";
 import theme from "../../styles/theme";
@@ -21,19 +21,11 @@ const FavouritesSection = () => {
 					VIEW MORE
 				</Button>
 			</View>
-			{favourites &&
-				favourites
-					.slice(0, 2)
-					.map((service: any, index: any) => (
-						<ServiceItem key={index} service={service} />
-					))}
-			{isLoading && (
-				<View>
-					{[0, 1].map((key) => (
-						<ServiceItem key={key} service={undefined} />
-					))}
-				</View>
-			)}
+			<ServiceList
+				services={favourites ? favourites.slice(0, 2) : undefined}
+				isLoading={isLoading}
+				numItems={2}
+			/>
 		</View>
 	);
 };
