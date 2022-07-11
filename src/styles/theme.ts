@@ -1,13 +1,15 @@
 const theme = {
 	colors: {
 		primary: "#2179BE",
-		background: "#f6f6f6",
+		background: "#FFFFFF",
 	},
 	spacing: {
 		sm: 8,
 		md: 12,
 		lg: 16,
 		xl: 24,
+		xl2: 32,
+		xl3: 48,
 	},
 	textVariants: {
 		sm: {

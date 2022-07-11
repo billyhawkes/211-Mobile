@@ -1,12 +1,13 @@
 import React from "react";
 import { Text, ScrollView, StyleSheet, View } from "react-native";
+import ScreenContainer from "../components/common/ScreenContainer";
 import theme from "../styles/theme";
 
 const Service = ({ route }: any) => {
 	const { service } = route.params;
 
 	return (
-		<ScrollView style={{ padding: 15 }}>
+		<ScreenContainer>
 			<Text style={[styles.header]}>{service.PublicName}</Text>
 			<View style={styles.container}>
 				<Text>{service.PhysicalAddressStreet1}</Text>
@@ -15,7 +16,7 @@ const Service = ({ route }: any) => {
 			<View style={styles.container}>
 				<Text>{service.Description}</Text>
 			</View>
-		</ScrollView>
+		</ScreenContainer>
 	);
 };
 

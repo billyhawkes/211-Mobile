@@ -1,6 +1,7 @@
 import React from "react";
-import { ScrollView, StyleSheet, View } from "react-native";
+import ScreenContainer from "../components/common/ScreenContainer";
 import ScreenTitle from "../components/common/ScreenTitle";
+import SearchState from "../components/common/SearchState";
 import ServiceList from "../components/service/ServiceList";
 import useLocation from "../hooks/useLocation";
 import useSearch from "../hooks/useSearch";
@@ -9,22 +10,17 @@ const Topic = ({ route }: any) => {
 	const { name } = route.params;
 	const { searchTopic } = useSearch();
 	const { location } = useLocation();
-	const { data, isLoading } = searchTopic(name, location);
+	const { data: services, isLoading, isError } = searchTopic(name, location);
 
 	return (
-		<ScrollView>
-			<View style={styles.container}>
-				<ScreenTitle name={name} />
-				<ServiceList services={data?.Records} isLoading={isLoading} numItems={10} />
-			</View>
-		</ScrollView>
+		<ScreenContainer>
+			<ScreenTitle name={name} />
+			<>{isLoading && <SearchState state={"loading"} />}</>
+			<>{isError && <SearchState state={"error"} />}</>
+			<>{services && services.RecordCount == 0 && <SearchState state={"not-found"} />}</>
+			<>{services && <ServiceList services={services.Records} />}</>
+		</ScreenContainer>
 	);
 };
-
-const styles = StyleSheet.create({
-	container: {
-		padding: 15,
-	},
-});
 
 export default Topic;

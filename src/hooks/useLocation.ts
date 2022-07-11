@@ -25,6 +25,8 @@ const useLocation = () => {
 		})();
 	}, []);
 
+	console.log(location);
+
 	return { location };
 };
 

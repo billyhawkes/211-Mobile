@@ -1,12 +1,13 @@
 import React from "react";
-import { ScrollView, Text, View, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import TopicIcon from "../components/TopicIcon";
 import { TopicList } from "../assets/data/TopicList";
 import ScreenTitle from "../components/common/ScreenTitle";
+import ScreenContainer from "../components/common/ScreenContainer";
 
 const Topics = () => {
 	return (
-		<ScrollView>
+		<ScreenContainer>
 			<ScreenTitle name="Topics" />
 			<View style={styles.container}>
 				{TopicList.map((topic, index) => (
@@ -14,7 +15,7 @@ const Topics = () => {
 				))}
 				<View style={{ width: "30%" }} />
 			</View>
-		</ScrollView>
+		</ScreenContainer>
 	);
 };
 

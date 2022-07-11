@@ -7,6 +7,17 @@ type SearchResponse = {
 	Records: any[];
 };
 
+// {
+//     "Dataset": "on",
+//     "Lang": "en",
+//     "SearchType": "proximity",
+//     "Latitude": 48.461312,
+//     "Longitude": -89.228477,
+//     "Distance": 10,
+//     "Search": "term",
+//     "Term": "help"
+// }
+
 const searchKeywordRequest = async (
 	keyword: string,
 	location: UserLocation | undefined
@@ -18,8 +29,8 @@ const searchKeywordRequest = async (
 			Dataset: "on",
 			Lang: "en",
 			SearchType: "proximity",
-			Latitude: location?.latitude || 48.461312,
-			Longitude: location?.longitude || -89.228477,
+			Latitude: 48.461312,
+			Longitude: -89.228477,
 			Distance: 100,
 			Search: "term",
 			Term: keyword,
@@ -40,8 +51,8 @@ const searchTopicRequest = async (
 			Dataset: "on",
 			Lang: "en",
 			SearchType: "proximity",
-			Latitude: location?.latitude || 48.461312,
-			Longitude: location?.longitude || -89.228477,
+			Latitude: 48.461312,
+			Longitude: -89.228477,
 			Distance: 100,
 			Search: "match",
 			MatchMode: "taxterm",
@@ -55,8 +66,8 @@ const searchTopicRequest = async (
 const useSearch = () => {
 	const searchKeyword = (keyword: string, location: UserLocation | undefined) =>
 		useQuery(["keyword", keyword], () => searchKeywordRequest(keyword, location), {
-			cacheTime: 100,
-			enabled: keyword !== "",
+			cacheTime: 0,
+			enabled: !!keyword && keyword !== "",
 		});
 
 	const searchTopic = (topic: string, location: UserLocation | undefined) =>

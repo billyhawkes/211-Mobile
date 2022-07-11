@@ -3,6 +3,7 @@ import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import Button from "../../components/common/Button";
+import { ServiceItemSkeleton } from "../../components/service/ServiceItem";
 import ServiceList from "../../components/service/ServiceList";
 import useFavourites from "../../hooks/useFavourites";
 import { DrawerParamList } from "../../navigation";
@@ -11,7 +12,7 @@ import theme from "../../styles/theme";
 const FavouritesSection = () => {
 	const navigation = useNavigation<DrawerNavigationProp<DrawerParamList>>();
 	const { findFavourites } = useFavourites();
-	const { data: favourites, isLoading } = findFavourites;
+	const { data: favourites } = findFavourites;
 
 	return (
 		<View>
@@ -21,11 +22,7 @@ const FavouritesSection = () => {
 					VIEW MORE
 				</Button>
 			</View>
-			<ServiceList
-				services={favourites ? favourites.slice(0, 2) : undefined}
-				isLoading={isLoading}
-				numItems={2}
-			/>
+			{favourites && <ServiceList services={favourites.slice(0, 2)} />}
 		</View>
 	);
 };

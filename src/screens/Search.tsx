@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { ScrollView, TextInput, StyleSheet } from "react-native";
+import { TextInput, StyleSheet, Text } from "react-native";
 import ScreenTitle from "../components/common/ScreenTitle";
 import { useForm, Controller } from "react-hook-form";
 import theme from "../styles/theme";
 import useSearch from "../hooks/useSearch";
 import useLocation from "../hooks/useLocation";
 import ServiceList from "../components/service/ServiceList";
+import ScreenContainer from "../components/common/ScreenContainer";
+import SearchState from "../components/common/SearchState";
 
 type FormData = {
 	keyword: string;
@@ -16,14 +18,14 @@ const Search = () => {
 	const { control, handleSubmit, getValues, setValue } = useForm<FormData>();
 	const { searchKeyword } = useSearch();
 	const { location } = useLocation();
-	const { data: services, isLoading } = searchKeyword(getValues("keyword"), location);
+	const { data: services, isLoading, isError } = searchKeyword(getValues("keyword"), location);
 
 	const onSubmit = (data: FormData) => {
 		setFormData(data);
 	};
 
 	return (
-		<ScrollView style={{ paddingHorizontal: 15 }}>
+		<ScreenContainer>
 			<ScreenTitle name="Search" />
 			<Controller
 				control={control}
@@ -42,8 +44,16 @@ const Search = () => {
 				)}
 				name="keyword"
 			/>
-			<ServiceList services={services?.Records} isLoading={isLoading} numItems={10} />
-		</ScrollView>
+			<>{isLoading && <SearchState state={"loading"} />}</>
+			<>{isError && <SearchState state={"error"} />}</>
+			<>{services && services.RecordCount == 0 && <SearchState state={"not-found"} />}</>
+			<>
+				{!formData && !services && !isLoading && !isError && (
+					<SearchState state={"waiting-to-search"} />
+				)}
+			</>
+			<>{services && <ServiceList services={services.Records} />}</>
+		</ScreenContainer>
 	);
 };
 
@@ -55,6 +65,7 @@ const styles = StyleSheet.create({
 		borderRadius: 5,
 		paddingHorizontal: 15,
 		marginBottom: 15,
+		height: theme.spacing.xl2,
 	},
 });
 
