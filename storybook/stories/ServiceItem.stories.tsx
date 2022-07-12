@@ -1,5 +1,5 @@
 import { storiesOf } from "@storybook/react-native";
-import ServiceItem from "../../src/components/service/ServiceItem";
+import ServiceItem from "../../src/components/ui/ServiceItem";
 
 let service = {
 	service: { PublicName: "Name Of A Fake Service", PhysicalAddressStreet1: "15 Fake Street" },

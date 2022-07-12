@@ -4,7 +4,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import useSkeleten from "../../hooks/useSkeleten";
 
 type Props = {
-	service: any;
+	service: Service;
 	starred: boolean;
 	onPress: () => any;
 	onPressStar: (starred: boolean) => any;

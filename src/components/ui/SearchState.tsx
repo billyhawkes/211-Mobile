@@ -4,7 +4,7 @@ import NotFoundImage from "../../assets/images/not-found-undraw.svg";
 import WaitingToSearchImage from "../../assets/images/waiting-to-search-undraw.svg";
 import ErrorImage from "../../assets/images/error-undraw.svg";
 import React from "react";
-import { ServiceItemSkeleton } from "../service/ServiceItem";
+import { ServiceItemSkeleton } from "./ServiceItem";
 
 type Props = {
 	state: "loading" | "error" | "not-found" | "waiting-to-search";
@@ -48,7 +48,7 @@ const SearchState = ({ state }: Props) => {
 
 const styles = StyleSheet.create({
 	text: { opacity: 0.7, textAlign: "center", marginTop: theme.spacing.lg },
-	image: { marginTop: theme.spacing.xl },
+	image: { marginTop: theme.spacing.xl3 },
 });
 
 export default SearchState;

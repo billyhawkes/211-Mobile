@@ -19,7 +19,7 @@ export type DrawerParamList = {
 		name: string;
 	};
 	Service: {
-		service: any;
+		service: Service;
 	};
 };
 

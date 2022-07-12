@@ -6,7 +6,7 @@ const loadFavouritesQuery = async () => {
 	return jsonValue != null ? JSON.parse(jsonValue) : [];
 };
 
-const addFavouriteMutation = async (service: any) => {
+const addFavouriteMutation = async (service: Service) => {
 	const jsonValue = await AsyncStorage.getItem("favourites");
 	const favourites = jsonValue != null ? JSON.parse(jsonValue) : [];
 	const newFavourites = JSON.stringify([...favourites, service]);
@@ -14,7 +14,7 @@ const addFavouriteMutation = async (service: any) => {
 	return service;
 };
 
-const removeFavouriteMutation = async (service: any) => {
+const removeFavouriteMutation = async (service: Service) => {
 	const jsonValue = await AsyncStorage.getItem("favourites");
 	const favourites = jsonValue != null ? JSON.parse(jsonValue) : [];
 	const newFavourites = JSON.stringify(favourites.filter((s: any) => s.id !== service.id));

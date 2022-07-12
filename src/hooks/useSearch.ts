@@ -4,19 +4,8 @@ import { API_KEY_211 } from "@env";
 
 type SearchResponse = {
 	RecordCount: number;
-	Records: any[];
+	Records: Service[];
 };
-
-// {
-//     "Dataset": "on",
-//     "Lang": "en",
-//     "SearchType": "proximity",
-//     "Latitude": 48.461312,
-//     "Longitude": -89.228477,
-//     "Distance": 10,
-//     "Search": "term",
-//     "Term": "help"
-// }
 
 const searchKeywordRequest = async (
 	keyword: string,

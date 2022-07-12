@@ -1,11 +1,11 @@
 import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { useNavigation } from "@react-navigation/native";
-import useFavourites from "../../hooks/useFavourites";
-import { DrawerParamList } from "../../navigation";
-import ServiceItem from "./ServiceItem";
+import useFavourites from "../hooks/useFavourites";
+import { DrawerParamList } from "../navigation";
+import ServiceItem from "./ui/ServiceItem";
 
 type Props = {
-	services: any[];
+	services: Service[];
 };
 
 const ServiceList = ({ services }: Props) => {
@@ -19,7 +19,10 @@ const ServiceList = ({ services }: Props) => {
 				<ServiceItem
 					key={service.id}
 					service={service}
-					starred={!!favourites.find((o: any) => o.id === service.id)}
+					starred={
+						favourites &&
+						!!favourites.find((favourite: Service) => favourite.id === service.id)
+					}
 					onPress={() => navigation.navigate("Service", { service })}
 					onPressStar={(starred) =>
 						starred ? removeFavourite.mutate(service) : addFavourite.mutate(service)

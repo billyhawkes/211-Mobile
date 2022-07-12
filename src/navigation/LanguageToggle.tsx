@@ -1,6 +1,6 @@
 import React from "react";
 import { View } from "react-native";
-import Button from "./common/Button";
+import Button from "../components/ui/Button";
 
 const LanguageToggle = () => (
 	<View>

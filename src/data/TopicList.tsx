@@ -1,7 +1,7 @@
-import { TopicIcon } from "../../components/TopicIcon";
+import { TopicIcon } from "../components/TopicIcon";
 import { FontAwesome5 } from "@expo/vector-icons";
-import colors from "../../styles/theme";
-import theme from "../../styles/theme";
+import colors from "../styles/theme";
+import theme from "../styles/theme";
 
 export const TopicList: TopicIcon[] = [
 	{

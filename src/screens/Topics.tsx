@@ -1,14 +1,12 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import TopicIcon from "../components/TopicIcon";
-import { TopicList } from "../assets/data/TopicList";
-import ScreenTitle from "../components/common/ScreenTitle";
-import ScreenContainer from "../components/common/ScreenContainer";
+import { TopicList } from "../data/TopicList";
+import ScreenContainer from "../components/layouts/ScreenContainer";
 
 const Topics = () => {
 	return (
-		<ScreenContainer>
-			<ScreenTitle name="Topics" />
+		<ScreenContainer title="Topics">
 			<View style={styles.container}>
 				{TopicList.map((topic, index) => (
 					<TopicIcon key={index} {...topic} />
