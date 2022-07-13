@@ -1,14 +1,15 @@
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import { NavigationContainer } from "@react-navigation/native";
+import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import React from "react";
 import Home from "../screens/Home";
 import Topics from "../screens/Topics";
-import Search from "../screens/Search";
 import { mainOptions, pageOptions } from "./ScreenOptions";
 import Topic from "../screens/Topic";
 import Favourites from "../screens/Favourites";
 import Service from "../screens/Service";
 import DrawerContent from "./DrawerContent";
+import Search from "../screens/Search";
+import theme from "../constants/theme";
 
 export type DrawerParamList = {
 	Home: undefined;
@@ -27,7 +28,16 @@ const Drawer = createDrawerNavigator<DrawerParamList>();
 
 const Navigation = () => {
 	return (
-		<NavigationContainer>
+		<NavigationContainer
+			theme={{
+				...DefaultTheme,
+				colors: {
+					...DefaultTheme.colors,
+					primary: theme.colors.primary,
+					background: theme.colors.background,
+				},
+			}}
+		>
 			<Drawer.Navigator
 				drawerContent={(props) => <DrawerContent {...props} />}
 				useLegacyImplementation

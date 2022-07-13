@@ -3,10 +3,10 @@ import { useNavigation } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import Button from "../../components/ui/Button";
-import ServiceList from "../../components/ServiceList";
+import ServiceList from "../../components/service/ServiceList";
 import useFavourites from "../../hooks/useFavourites";
 import { DrawerParamList } from "../../navigation";
-import theme from "../../styles/theme";
+import theme from "../../constants/theme";
 
 const FavouritesSection = () => {
 	const navigation = useNavigation<DrawerNavigationProp<DrawerParamList>>();
@@ -32,7 +32,7 @@ const FavouritesSection = () => {
 					VIEW MORE
 				</Button>
 			</View>
-			{favourites && <ServiceList services={favourites.slice(0, 2)} />}
+			{favourites ? <ServiceList services={favourites.slice(0, 2)} /> : null}
 		</View>
 	);
 };

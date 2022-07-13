@@ -2,15 +2,15 @@ import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { View, StyleSheet, Text, Pressable } from "react-native";
-import { DrawerParamList } from "../navigation";
-import theme from "../styles/theme";
+import { DrawerParamList } from "../../navigation";
+import theme from "../../constants/theme";
 
-export type TopicIcon = {
+export type TopicIconType = {
 	name: string;
 	icon: JSX.Element;
 };
 
-const TopicIcon = ({ name, icon }: TopicIcon) => {
+const TopicIcon = ({ name, icon }: TopicIconType) => {
 	const navigation = useNavigation<DrawerNavigationProp<DrawerParamList>>();
 	return (
 		<Pressable style={styles.container} onPress={() => navigation.navigate("Topic", { name })}>

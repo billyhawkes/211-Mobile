@@ -3,7 +3,7 @@ import { DrawerNavigationOptions } from "@react-navigation/drawer";
 import { RouteProp } from "@react-navigation/native";
 import { Pressable } from "react-native";
 import { DrawerParamList } from ".";
-import theme from "../styles/theme";
+import theme from "../constants/theme";
 
 export const mainOptions:
 	| DrawerNavigationOptions

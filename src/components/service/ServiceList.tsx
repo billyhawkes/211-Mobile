@@ -1,8 +1,8 @@
 import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { useNavigation } from "@react-navigation/native";
-import useFavourites from "../hooks/useFavourites";
-import { DrawerParamList } from "../navigation";
-import ServiceItem from "./ui/ServiceItem";
+import useFavourites from "../../hooks/useFavourites";
+import { DrawerParamList } from "../../navigation";
+import ServiceItem from "./ServiceItem";
 
 type Props = {
 	services: Service[];

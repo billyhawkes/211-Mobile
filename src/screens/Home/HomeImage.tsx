@@ -1,6 +1,6 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import HImage from "../../assets/images/home-image-undraw.svg";
+import HImage from "../../assets/svg/home-image-undraw.svg";
 
 const HomeImage = () => {
 	return (

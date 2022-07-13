@@ -1,5 +1,5 @@
 import { ScrollView, StyleSheet, Text } from "react-native";
-import theme from "../../styles/theme";
+import theme from "../../constants/theme";
 
 type Props = {
 	title?: string;
@@ -9,7 +9,7 @@ type Props = {
 const ScreenContainer = ({ children, title }: Props) => {
 	return (
 		<ScrollView style={styles.container}>
-			{title && <Text style={[theme.textVariants.lg, styles.title]}>{title}</Text>}
+			{title ? <Text style={[theme.textVariants.lg, styles.title]}>{title}</Text> : null}
 			{children}
 		</ScrollView>
 	);

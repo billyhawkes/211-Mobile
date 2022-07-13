@@ -1,6 +1,7 @@
 const theme = {
 	colors: {
 		primary: "#2179BE",
+		link: "#0645AD",
 		background: "#FFFFFF",
 	},
 	spacing: {

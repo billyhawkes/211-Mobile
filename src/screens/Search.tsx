@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { TextInput, StyleSheet } from "react-native";
 import { useForm, Controller } from "react-hook-form";
-import theme from "../styles/theme";
+import theme from "../constants/theme";
 import useSearch from "../hooks/useSearch";
 import useLocation from "../hooks/useLocation";
-import ServiceList from "../components/ServiceList";
+import ServiceList from "../components/service/ServiceList";
 import ScreenContainer from "../components/layouts/ScreenContainer";
-import SearchState from "../components/ui/SearchState";
+import SearchState from "../components/search/SearchState";
 
 type FormData = {
 	keyword: string;
@@ -47,11 +47,13 @@ const Search = () => {
 				)}
 				name="keyword"
 			/>
-			<>{isLoading && <SearchState state={"loading"} />}</>
-			<>{isError && <SearchState state={"error"} />}</>
-			<>{services && services.RecordCount == 0 && <SearchState state={"not-found"} />}</>
-			<>{isIdle && <SearchState state={"waiting-to-search"} />}</>
-			<>{services && <ServiceList services={services.Records} />}</>
+			<>{isLoading ? <SearchState state={"loading"} /> : null}</>
+			<>{isError ? <SearchState state={"error"} /> : null}</>
+			<>
+				{services && services.RecordCount == 0 ? <SearchState state={"not-found"} /> : null}
+			</>
+			<>{isIdle ? <SearchState state={"waiting-to-search"} /> : null}</>
+			<>{services ? <ServiceList services={services.Records} /> : null}</>
 		</ScreenContainer>
 	);
 };

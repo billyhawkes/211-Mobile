@@ -1,12 +1,12 @@
 import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { View, StyleSheet, Text, Pressable } from "react-native";
-import TopicIcon from "../../components/TopicIcon";
-import { TopicList } from "../../data/TopicList";
+import { View, StyleSheet, Text } from "react-native";
+import { TopicList } from "../../constants/TopicList";
 import { DrawerParamList } from "../../navigation";
 import Button from "../../components/ui/Button";
-import theme from "../../styles/theme";
+import theme from "../../constants/theme";
+import TopicIcon from "../../components/topic/TopicIcon";
 
 const TopicSection = () => {
 	const navigation = useNavigation<DrawerNavigationProp<DrawerParamList>>();
