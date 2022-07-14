@@ -2,7 +2,7 @@ import React from "react";
 import ContactSection from "./ContactSection";
 import FavouritesSection from "./FavouritesSection";
 import TopicSection from "./TopicSection";
-import ScreenContainer from "../../components/layouts/ScreenContainer";
+import ScreenContainer from "@/components/layouts/ScreenContainer";
 import MainImage from "./HomeImage";
 
 const Home = () => {

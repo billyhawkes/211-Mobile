@@ -1,5 +1,5 @@
 import { ScrollView, StyleSheet, Text } from "react-native";
-import theme from "../../constants/theme";
+import theme from "@/constants/theme";
 
 type Props = {
 	title?: string;

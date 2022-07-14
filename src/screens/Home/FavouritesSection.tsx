@@ -2,11 +2,11 @@ import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { useNavigation } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
-import Button from "../../components/ui/Button";
-import ServiceList from "../../components/service/ServiceList";
-import useFavourites from "../../hooks/useFavourites";
-import { DrawerParamList } from "../../navigation";
-import theme from "../../constants/theme";
+import Button from "@/components/ui/Button";
+import ServiceList from "@/components/service/ServiceList";
+import useFavourites from "@/hooks/useFavourites";
+import { DrawerParamList } from "@/navigation";
+import theme from "@/constants/theme";
 
 const FavouritesSection = () => {
 	const navigation = useNavigation<DrawerNavigationProp<DrawerParamList>>();

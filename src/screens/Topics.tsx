@@ -1,8 +1,8 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import { TopicList } from "../constants/TopicList";
-import ScreenContainer from "../components/layouts/ScreenContainer";
-import TopicIcon from "../components/topic/TopicIcon";
+import { TopicList } from "@/constants/TopicList";
+import ScreenContainer from "@/components/layouts/ScreenContainer";
+import TopicIcon from "@/components/topic/TopicIcon";
 
 const Topics = () => {
 	return (

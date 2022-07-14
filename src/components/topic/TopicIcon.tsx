@@ -2,8 +2,8 @@ import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { View, StyleSheet, Text, Pressable } from "react-native";
-import { DrawerParamList } from "../../navigation";
-import theme from "../../constants/theme";
+import { DrawerParamList } from "@/navigation";
+import theme from "@/constants/theme";
 
 export type TopicIconType = {
 	name: string;

@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { TextInput, StyleSheet } from "react-native";
 import { useForm, Controller } from "react-hook-form";
-import theme from "../constants/theme";
-import useSearch from "../hooks/useSearch";
-import useLocation from "../hooks/useLocation";
-import ServiceList from "../components/service/ServiceList";
-import ScreenContainer from "../components/layouts/ScreenContainer";
-import SearchState from "../components/search/SearchState";
+import theme from "@/constants/theme";
+import useSearch from "@/hooks/useSearch";
+import useLocation from "@/hooks/useLocation";
+import ServiceList from "@/components/service/ServiceList";
+import ScreenContainer from "@/components/layouts/ScreenContainer";
+import SearchState from "@/components/search/SearchState";
 
 type FormData = {
 	keyword: string;

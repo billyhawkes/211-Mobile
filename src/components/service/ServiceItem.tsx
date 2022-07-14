@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, Animated, Pressable } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
-import useSkeleten from "../../hooks/useSkeleten";
+import useSkeleten from "@/hooks/useSkeleten";
 
 type Props = {
 	service: Service;

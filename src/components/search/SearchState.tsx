@@ -1,10 +1,10 @@
-import theme from "../../constants/theme";
+import theme from "@/constants/theme";
 import { Text, StyleSheet, Pressable, View } from "react-native";
-import NotFoundImage from "../../assets/svg/not-found-undraw.svg";
-import WaitingToSearchImage from "../../assets/svg/waiting-to-search-undraw.svg";
-import ErrorImage from "../../assets/svg/error-undraw.svg";
+import NotFoundImage from "@/assets/svg/not-found-undraw.svg";
+import WaitingToSearchImage from "@/assets/svg/waiting-to-search-undraw.svg";
+import ErrorImage from "@/assets/svg/error-undraw.svg";
 import React from "react";
-import { ServiceItemSkeleton } from "../service/ServiceItem";
+import { ServiceItemSkeleton } from "@/components/service/ServiceItem";
 
 type Props = {
 	state: "loading" | "error" | "not-found" | "waiting-to-search";

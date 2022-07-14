@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import Button from "../../components/ui/Button";
-import theme from "../../constants/theme";
+import Button from "@/components/ui/Button";
+import theme from "@/constants/theme";
 
 const ContactSection = () => {
 	return (

@@ -2,12 +2,12 @@ import React from "react";
 import { Text, View } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { DrawerScreenProps } from "@react-navigation/drawer";
-import { DrawerParamList } from "../../navigation";
-import ScreenContainer from "../../components/layouts/ScreenContainer";
+import { DrawerParamList } from "@/navigation";
+import ScreenContainer from "@/components/layouts/ScreenContainer";
 import styles from "./styles";
 import InfoSection from "./InfoSection";
 import LinkSection from "./LinkSection";
-import useLinkOut from "../../hooks/useLinkOut";
+import useLinkOut from "@/hooks/useLinkOut";
 
 const Service = ({ route }: DrawerScreenProps<DrawerParamList, "Service">) => {
 	const {

@@ -12,7 +12,7 @@ const useLoadResources = () => {
 				await SplashScreen.preventAutoHideAsync();
 				// Fonts
 				await Font.loadAsync({
-					Lato: require("../assets/fonts/Lato-Regular.ttf"),
+					Lato: require("@/assets/fonts/Lato-Regular.ttf"),
 				});
 				await new Promise((resolve) => setTimeout(resolve, 2000));
 			} catch (e) {

@@ -1,15 +1,15 @@
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import React from "react";
-import Home from "../screens/Home";
-import Topics from "../screens/Topics";
+import Home from "@/screens/Home";
+import Topics from "@/screens/Topics";
 import { mainOptions, pageOptions } from "./ScreenOptions";
-import Topic from "../screens/Topic";
-import Favourites from "../screens/Favourites";
-import Service from "../screens/Service";
+import Topic from "@/screens/Topic";
+import Favourites from "@/screens/Favourites";
+import Service from "@/screens/Service";
 import DrawerContent from "./DrawerContent";
-import Search from "../screens/Search";
-import theme from "../constants/theme";
+import Search from "@/screens/Search";
+import theme from "@/constants/theme";
 
 export type DrawerParamList = {
 	Home: undefined;

@@ -2,9 +2,9 @@ import "react-native-gesture-handler";
 import StorybookUI from "../storybook";
 import React from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
-import useLocation from "./hooks/useLocation";
-import Navigation from "./navigation";
-import useLoadResources from "./hooks/useLoadResources";
+import useLocation from "@/hooks/useLocation";
+import Navigation from "@/navigation";
+import useLoadResources from "@/hooks/useLoadResources";
 import { View } from "react-native";
 import { registerRootComponent } from "expo";
 

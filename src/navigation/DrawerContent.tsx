@@ -1,8 +1,6 @@
-import { DrawerContentScrollView, DrawerItem, DrawerItemList } from "@react-navigation/drawer";
+import { DrawerContentScrollView, DrawerItemList } from "@react-navigation/drawer";
 import React from "react";
-import { Linking, View, StyleSheet, Text } from "react-native";
-import LanguageToggle from "./LanguageToggle";
-import colors from "../constants/theme";
+import { StyleSheet } from "react-native";
 
 const DrawerContent = (props: any) => {
 	return (

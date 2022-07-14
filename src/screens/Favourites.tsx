@@ -1,10 +1,10 @@
 import React from "react";
 import { Text, StyleSheet, View } from "react-native";
-import ScreenContainer from "../components/layouts/ScreenContainer";
-import EmptyImage from "../assets/svg/empty-undraw.svg";
-import ServiceList from "../components/service/ServiceList";
-import useFavourites from "../hooks/useFavourites";
-import theme from "../constants/theme";
+import ScreenContainer from "@/components/layouts/ScreenContainer";
+import EmptyImage from "@/assets/svg/empty-undraw.svg";
+import ServiceList from "@/components/service/ServiceList";
+import useFavourites from "@/hooks/useFavourites";
+import theme from "@/constants/theme";
 
 const Favourites = () => {
 	const { findFavourites } = useFavourites();

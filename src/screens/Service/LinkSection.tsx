@@ -1,7 +1,7 @@
 import { FontAwesome5 } from "@expo/vector-icons";
 import React from "react";
 import { Pressable, View, Text, StyleSheet } from "react-native";
-import theme from "../../constants/theme";
+import theme from "@/constants/theme";
 import serviceStyles from "./styles";
 
 type Props = {
