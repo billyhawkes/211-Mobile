@@ -1,29 +1,40 @@
 import "react-native-gesture-handler";
-import StorybookUI from "../storybook";
-import React from "react";
-import { QueryClient, QueryClientProvider } from "react-query";
-import useLocation from "@/hooks/useLocation";
-import Navigation from "@/navigation";
-import useLoadResources from "@/hooks/useLoadResources";
-import { View } from "react-native";
+import { OPEN_STORYBOOK } from "@env";
+import useLoadResources from "@hooks/useLoadResources";
+import useLocation from "@hooks/useLocation";
+import Navigation from "@navigation/index";
 import { registerRootComponent } from "expo";
+import React from "react";
+import { View } from "react-native";
+import { QueryClient, QueryClientProvider } from "react-query";
 
-const App = () => {
-	const { resLoaded, onLayoutRootView } = useLoadResources();
-	useLocation();
-	const queryClient = new QueryClient();
+import StorybookUI from "../storybook";
 
-	if (!resLoaded) {
-		return null;
-	}
+function App() {
+    const { resLoaded, onLayoutRootView } = useLoadResources();
+    useLocation();
+    const queryClient = new QueryClient();
 
-	return (
-		<QueryClientProvider client={queryClient}>
-			<View style={{ flex: 1 }} onLayout={onLayoutRootView}>
-				<Navigation />
-			</View>
-		</QueryClientProvider>
-	);
-};
+    if (!resLoaded) {
+        return null;
+    }
 
-export default false ? StorybookUI : registerRootComponent(App);
+    return (
+        <QueryClientProvider client={queryClient}>
+            <View
+                style={{ flex: 1 }}
+                onLayout={() => {
+                    void (async () => {
+                        await onLayoutRootView();
+                    })();
+                }}
+            >
+                <Navigation />
+            </View>
+        </QueryClientProvider>
+    );
+}
+
+export default OPEN_STORYBOOK === "true"
+    ? StorybookUI
+    : registerRootComponent(App);

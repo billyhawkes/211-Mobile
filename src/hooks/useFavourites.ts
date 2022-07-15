@@ -1,50 +1,60 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
-const loadFavouritesQuery = async () => {
-	const jsonValue = await AsyncStorage.getItem("favourites");
-	return jsonValue != null ? JSON.parse(jsonValue) : [];
+const getFavourites = async (): Promise<Service[]> => {
+    const jsonValue = await AsyncStorage.getItem("favourites");
+    const services = jsonValue != null ? JSON.parse(jsonValue) : [];
+    return services;
 };
 
-const addFavouriteMutation = async (service: Service) => {
-	const jsonValue = await AsyncStorage.getItem("favourites");
-	const favourites = jsonValue != null ? JSON.parse(jsonValue) : [];
-	const newFavourites = JSON.stringify([...favourites, service]);
-	await AsyncStorage.setItem("favourites", newFavourites);
-	return service;
+const addFavourite = async (service: Service) => {
+    const favourites = await getFavourites();
+    const newFavourites = JSON.stringify([...favourites, service]);
+    await AsyncStorage.setItem("favourites", newFavourites);
+    return service;
 };
 
-const removeFavouriteMutation = async (service: Service) => {
-	const jsonValue = await AsyncStorage.getItem("favourites");
-	const favourites = jsonValue != null ? JSON.parse(jsonValue) : [];
-	const newFavourites = JSON.stringify(favourites.filter((s: any) => s.id !== service.id));
-	await AsyncStorage.setItem("favourites", newFavourites);
-	return service;
+const removeFavourite = async (service: Service) => {
+    const favourites = await getFavourites();
+    const newFavourites = JSON.stringify(
+        favourites.filter((s: Service) => s.id !== service.id)
+    );
+    await AsyncStorage.setItem("favourites", newFavourites);
+    return service;
 };
 
 const useFavourites = () => {
-	const queryClient = useQueryClient();
+    const queryClient = useQueryClient();
 
-	const findFavourites = useQuery("favourites", loadFavouritesQuery);
+    const useFindFavourites = useQuery("favourites", getFavourites);
 
-	const addFavourite = useMutation(addFavouriteMutation, {
-		onSuccess: (service) => {
-			queryClient.setQueryData("favourites", (currentFavourites: any) => [
-				service,
-				...currentFavourites,
-			]);
-		},
-	});
+    const useAddFavourite = useMutation(addFavourite, {
+        onSuccess: (service) => {
+            queryClient.setQueryData<Service[]>(
+                "favourites",
+                (currentFavourites) =>
+                    currentFavourites
+                        ? [service, ...currentFavourites]
+                        : [service]
+            );
+        },
+    });
 
-	const removeFavourite = useMutation(removeFavouriteMutation, {
-		onSuccess: (removedService) => {
-			queryClient.setQueryData("favourites", (currentFavourites: any) =>
-				currentFavourites.filter((service: any) => service.id !== removedService.id)
-			);
-		},
-	});
+    const useRemoveFavourite = useMutation(removeFavourite, {
+        onSuccess: (removedService) => {
+            queryClient.setQueryData<Service[]>(
+                "favourites",
+                (currentFavourites) =>
+                    currentFavourites
+                        ? currentFavourites.filter(
+                              (service) => service.id !== removedService.id
+                          )
+                        : []
+            );
+        },
+    });
 
-	return { findFavourites, addFavourite, removeFavourite };
+    return { useFindFavourites, useAddFavourite, useRemoveFavourite };
 };
 
 export default useFavourites;

@@ -1,12 +1,24 @@
+import Button from "@components/ui/Button";
 import React from "react";
 import { View } from "react-native";
-import Button from "@/components/ui/Button";
 
 const LanguageToggle = () => (
-	<View>
-		<Button onPress={() => {}}>EN</Button>
-		<Button onPress={() => {}}>FR</Button>
-	</View>
+    <View>
+        <Button
+            onPress={() => {
+                console.log("TODO");
+            }}
+        >
+            EN
+        </Button>
+        <Button
+            onPress={() => {
+                console.log("TODO");
+            }}
+        >
+            FR
+        </Button>
+    </View>
 );
 
 export default LanguageToggle;
