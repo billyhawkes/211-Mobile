@@ -1,4 +1,4 @@
-import ServiceList from "@components/service/ServiceList";
+import ServiceList from "@components/services/ServiceList";
 import Button from "@components/ui/Button";
 import theme from "@constants/theme";
 import useServices from "@hooks/useServices";

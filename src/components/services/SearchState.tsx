@@ -1,7 +1,7 @@
 import ErrorImage from "@assets/svg/error-undraw.svg";
 import NotFoundImage from "@assets/svg/not-found-undraw.svg";
 import WaitingToSearchImage from "@assets/svg/waiting-to-search-undraw.svg";
-import { ServiceItemSkeleton } from "@components/service/ServiceItem";
+import { ServiceItemSkeleton } from "@components/services/ServiceItem";
 import theme from "@constants/theme";
 import React from "react";
 import { Text, StyleSheet, Pressable, View } from "react-native";

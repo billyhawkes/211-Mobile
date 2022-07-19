@@ -1,8 +1,9 @@
-import { FontAwesome } from "@expo/vector-icons";
 import { Service } from "@hooks/useServices";
 import useSkeleten from "@hooks/useSkeleten";
 import React from "react";
 import { View, Text, StyleSheet, Animated, Pressable } from "react-native";
+
+import StarButton from "./StarButton";
 
 type Props = {
     service: Service;
@@ -31,13 +32,11 @@ const ServiceItem = ({
             <Text style={[{ opacity: 0.7, fontSize: 12, marginTop: 10 }]}>
                 {location}
             </Text>
-            <Pressable style={styles.star} onPress={() => onPressStar(starred)}>
-                <FontAwesome
-                    name={starred ? "star" : "star-o"}
-                    size={24}
-                    color={starred ? "#FDCC0D" : "black"}
-                />
-            </Pressable>
+            <StarButton
+                starred={starred}
+                size={24}
+                onPress={() => onPressStar(starred)}
+            />
         </Pressable>
     );
 };
@@ -75,12 +74,6 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         borderWidth: 1,
         borderColor: "#ccc",
-    },
-    star: {
-        position: "absolute",
-        right: 0,
-        top: 0,
-        padding: 10,
     },
     skeleton: {
         width: "100%",

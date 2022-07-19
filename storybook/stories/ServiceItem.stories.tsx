@@ -2,7 +2,7 @@ import { Service } from "@hooks/useServices";
 import { storiesOf } from "@storybook/react-native";
 import React from "react";
 
-import ServiceItem from "../../src/components/service/ServiceItem";
+import ServiceItem from "../../src/components/services/ServiceItem";
 
 const service: Service = {
     id: 0,

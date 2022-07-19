@@ -1,5 +1,5 @@
 import ScreenContainer from "@components/layouts/ScreenContainer";
-import TopicIcon from "@components/topic/TopicIcon";
+import TopicIcon from "@components/services/TopicIcon";
 import { TopicList } from "@constants/TopicList";
 import React from "react";
 import { View, StyleSheet } from "react-native";

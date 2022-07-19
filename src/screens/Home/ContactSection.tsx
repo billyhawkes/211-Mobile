@@ -1,28 +1,22 @@
 import Button from "@components/ui/Button";
 import theme from "@constants/theme";
+import useLinkOut from "@hooks/useLinkOut";
 import React from "react";
 import { View, StyleSheet } from "react-native";
 
 const ContactSection = () => {
+    const { call, email } = useLinkOut();
     return (
         <View style={styles.container}>
             <Button
                 primary
-                onPress={() => {
-                    console.log("TODO");
-                }}
+                onPress={() => call()}
                 style={{ marginRight: theme.spacing["md"], flex: 1 }}
             >
-                CALL 2-1-1
+                CALL US
             </Button>
-            <Button
-                primary
-                onPress={() => {
-                    console.log("TODO");
-                }}
-                style={{ flex: 1 }}
-            >
-                TEXT 2-1-1
+            <Button primary onPress={() => email()} style={{ flex: 1 }}>
+                EMAIL US
             </Button>
         </View>
     );

@@ -1,4 +1,4 @@
-import { TopicIconType } from "@components/topic/TopicIcon";
+import { TopicIconType } from "@components/services/TopicIcon";
 import theme from "@constants/theme";
 import { FontAwesome5 } from "@expo/vector-icons";
 import React from "react";

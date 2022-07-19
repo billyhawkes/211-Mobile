@@ -1,4 +1,4 @@
-import { API_KEY_211 } from "@env";
+import { API_URL } from "@env";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import z from "zod";
@@ -64,26 +64,23 @@ const searchKeywordRequest = async (
     keyword: string,
     location: UserLocation | undefined
 ): Promise<ServiceResponse> => {
-    const res = await fetch(
-        `https://data.211support.org/api/v2/search?key=${API_KEY_211}`,
-        {
-            method: "Post",
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                Dataset: "on",
-                Lang: "en",
-                SearchType: "proximity",
-                Latitude: 48.461312,
-                Longitude: -89.228477,
-                Distance: 100,
-                Search: "term",
-                Term: keyword,
-            }),
-        }
-    );
+    const res = await fetch(`${API_URL}`, {
+        method: "Post",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            Dataset: "on",
+            Lang: "en",
+            SearchType: "proximity",
+            Latitude: 48.461312,
+            Longitude: -89.228477,
+            Distance: 100,
+            Search: "term",
+            Term: keyword,
+        }),
+    });
     const data: unknown = await res.json();
     return serviceSearchResponseSchema.parse(data);
 };
@@ -92,27 +89,24 @@ const searchTopicRequest = async (
     topic: string,
     location: UserLocation | undefined
 ): Promise<ServiceResponse> => {
-    const res = await fetch(
-        `https://data.211support.org/api/v2/search?key=${API_KEY_211}`,
-        {
-            method: "Post",
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                Dataset: "on",
-                Lang: "en",
-                SearchType: "proximity",
-                Latitude: 48.461312,
-                Longitude: -89.228477,
-                Distance: 100,
-                Search: "match",
-                MatchMode: "taxterm",
-                MatchTerms: topic,
-            }),
-        }
-    );
+    const res = await fetch(`${API_URL}`, {
+        method: "Post",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            Dataset: "on",
+            Lang: "en",
+            SearchType: "proximity",
+            Latitude: 48.461312,
+            Longitude: -89.228477,
+            Distance: 100,
+            Search: "match",
+            MatchMode: "taxterm",
+            MatchTerms: topic,
+        }),
+    });
     const data: unknown = await res.json();
     return serviceSearchResponseSchema.parse(data);
 };
@@ -197,12 +191,20 @@ const useServices = () => {
         },
     });
 
+    const isFavourite = (id: number) => {
+        const favourites = queryClient.getQueryData<Service[]>("favourites");
+        return favourites
+            ? !!favourites.find((favourite: Service) => favourite.id === id)
+            : false;
+    };
+
     return {
         useKeywordSearch,
         useTopicSearch,
         useFindFavourites,
         useAddFavourite,
         useRemoveFavourite,
+        isFavourite,
     };
 };
 

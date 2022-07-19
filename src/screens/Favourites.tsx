@@ -1,6 +1,6 @@
 import EmptyImage from "@assets/svg/empty-undraw.svg";
 import ScreenContainer from "@components/layouts/ScreenContainer";
-import ServiceList from "@components/service/ServiceList";
+import ServiceList from "@components/services/ServiceList";
 import theme from "@constants/theme";
 import useServices from "@hooks/useServices";
 import React from "react";

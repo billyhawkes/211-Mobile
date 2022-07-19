@@ -1,4 +1,4 @@
-import TopicIcon from "@components/topic/TopicIcon";
+import TopicIcon from "@components/services/TopicIcon";
 import Button from "@components/ui/Button";
 import { TopicList } from "@constants/TopicList";
 import theme from "@constants/theme";

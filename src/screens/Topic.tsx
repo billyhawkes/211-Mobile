@@ -1,6 +1,6 @@
 import ScreenContainer from "@components/layouts/ScreenContainer";
-import SearchState from "@components/search/SearchState";
-import ServiceList from "@components/service/ServiceList";
+import SearchState from "@components/services/SearchState";
+import ServiceList from "@components/services/ServiceList";
 import useLocation from "@hooks/useLocation";
 import useServices from "@hooks/useServices";
 import { ScreenParameters } from "@navigation/ScreenOptions";

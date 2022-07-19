@@ -1,4 +1,6 @@
 declare module "@env" {
-    export const API_KEY_211: string;
+    export const API_URL: string;
     export const OPEN_STORYBOOK: string;
+    export const PHONE_211_NUMBER: string;
+    export const EMAIL_211_LINK: string;
 }

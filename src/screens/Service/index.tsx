@@ -1,34 +1,64 @@
 import ScreenContainer from "@components/layouts/ScreenContainer";
+import StarButton from "@components/services/StarButton";
 import { FontAwesome5 } from "@expo/vector-icons";
 import useLinkOut from "@hooks/useLinkOut";
+import useServices from "@hooks/useServices";
 import { ScreenParameters } from "@navigation/ScreenOptions";
 import { DrawerScreenProps } from "@react-navigation/drawer";
-import React from "react";
+import React, { useEffect } from "react";
 import { Text, View } from "react-native";
 
 import InfoSection from "./InfoSection";
 import LinkSection from "./LinkSection";
 import styles from "./styles";
 
-const Service = ({ route }: DrawerScreenProps<ScreenParameters, "Service">) => {
+const Service = ({
+    route,
+    navigation,
+}: DrawerScreenProps<ScreenParameters, "Service">) => {
+    const { service } = route.params;
+
     const {
-        service: {
-            PublicName,
-            PhysicalAddressPostalCode,
-            PhysicalAddressStreet1,
-            PhysicalAddressCity,
-            PhysicalAddressProvince,
-            PhoneNumbers,
-            Description,
-            Email,
-            Website,
-            UpdatedOn,
-            Hours,
-        },
-    } = route.params;
+        id,
+        PublicName,
+        PhysicalAddressPostalCode,
+        PhysicalAddressStreet1,
+        PhysicalAddressCity,
+        PhysicalAddressProvince,
+        PhoneNumbers,
+        Description,
+        Email,
+        Website,
+        UpdatedOn,
+        Hours,
+    } = service;
 
     const location = `${PhysicalAddressStreet1}, ${PhysicalAddressCity}, ${PhysicalAddressProvince}`;
     const { maps } = useLinkOut();
+    const { useAddFavourite, useRemoveFavourite, isFavourite } = useServices();
+
+    useEffect(() => {
+        navigation.setOptions({
+            headerRight: () => (
+                <StarButton
+                    starred={isFavourite(id)}
+                    size={24}
+                    onPress={(starred) =>
+                        starred
+                            ? useRemoveFavourite.mutate(service)
+                            : useAddFavourite.mutate(service)
+                    }
+                />
+            ),
+        });
+    }, [
+        navigation,
+        useAddFavourite,
+        useRemoveFavourite,
+        service,
+        isFavourite,
+        id,
+    ]);
 
     return (
         <ScreenContainer>
