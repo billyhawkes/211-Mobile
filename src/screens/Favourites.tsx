@@ -2,12 +2,12 @@ import EmptyImage from "@assets/svg/empty-undraw.svg";
 import ScreenContainer from "@components/layouts/ScreenContainer";
 import ServiceList from "@components/service/ServiceList";
 import theme from "@constants/theme";
-import useFavourites from "@hooks/useFavourites";
+import useServices from "@hooks/useServices";
 import React from "react";
 import { Text, StyleSheet } from "react-native";
 
 const Favourites = () => {
-    const { useFindFavourites } = useFavourites();
+    const { useFindFavourites } = useServices();
     const { data: favourites } = useFindFavourites;
 
     return (

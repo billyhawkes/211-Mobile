@@ -1,11 +1,16 @@
 import * as Location from "expo-location";
 import { useEffect, useState } from "react";
 
+export type UserLocation = {
+    latitude: number;
+    longitude: number;
+};
+
 const useLocation = () => {
     const [location, setLocation] = useState<UserLocation | undefined>();
 
     useEffect(() => {
-        (async () => {
+        const getGPSLocation = async () => {
             const { status } =
                 await Location.requestForegroundPermissionsAsync();
             if (status !== "granted") {
@@ -18,7 +23,10 @@ const useLocation = () => {
                 latitude: location.coords.latitude,
                 longitude: location.coords.longitude,
             });
-        })();
+        };
+        getGPSLocation().catch(() => {
+            console.log("Failed to obtain location.");
+        });
     }, []);
 
     return { location };

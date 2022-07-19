@@ -10,7 +10,7 @@ import Topics from "@screens/Topics";
 import React from "react";
 
 import DrawerContent from "./DrawerContent";
-import { mainOptions, pageOptions } from "./ScreenOptions";
+import { mainOptions, pageOptions, ScreenParameters } from "./ScreenOptions";
 
 export const Drawer = createDrawerNavigator<ScreenParameters>();
 

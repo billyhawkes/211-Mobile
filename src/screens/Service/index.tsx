@@ -1,6 +1,7 @@
 import ScreenContainer from "@components/layouts/ScreenContainer";
 import { FontAwesome5 } from "@expo/vector-icons";
 import useLinkOut from "@hooks/useLinkOut";
+import { ScreenParameters } from "@navigation/ScreenOptions";
 import { DrawerScreenProps } from "@react-navigation/drawer";
 import React from "react";
 import { Text, View } from "react-native";

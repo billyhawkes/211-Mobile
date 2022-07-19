@@ -14,21 +14,17 @@ type FormData = {
 
 const Search = () => {
     const { control, getValues } = useForm<FormData>();
-    const { useSearch } = useServices();
+    const { useKeywordSearch } = useServices();
     const { location } = useLocation();
-    const {
-        data: services,
-        isLoading,
-        isError,
-        isIdle,
-        refetch,
-    } = useSearch(getValues("keyword"), location);
+    const { data, isLoading, isError, isIdle, refetch } = useKeywordSearch(
+        getValues("keyword"),
+        location
+    );
 
     const search = () => {
-        void (async () => {
-            await refetch();
-        })();
+        refetch().catch(() => console.error("Failed to refetch."));
     };
+
     return (
         <ScreenContainer title="Search">
             <Controller
@@ -44,6 +40,7 @@ const Search = () => {
                         value={value}
                         selectionColor={theme.colors.primary}
                         onSubmitEditing={() => search()}
+                        autoFocus={true}
                     />
                 )}
                 name="keyword"
@@ -51,12 +48,12 @@ const Search = () => {
             <>{isLoading ? <SearchState state="loading" /> : null}</>
             <>{isError ? <SearchState state="error" /> : null}</>
             <>
-                {services && services.RecordCount === "0" ? (
+                {data && data.RecordCount === "0" ? (
                     <SearchState state="not-found" />
                 ) : null}
             </>
             <>{isIdle ? <SearchState state="waiting-to-search" /> : null}</>
-            <>{services ? <ServiceList services={services.Records} /> : null}</>
+            <>{data ? <ServiceList services={data.Records} /> : null}</>
         </ScreenContainer>
     );
 };

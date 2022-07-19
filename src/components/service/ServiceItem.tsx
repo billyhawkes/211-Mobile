@@ -1,4 +1,5 @@
 import { FontAwesome } from "@expo/vector-icons";
+import { Service } from "@hooks/useServices";
 import useSkeleten from "@hooks/useSkeleten";
 import React from "react";
 import { View, Text, StyleSheet, Animated, Pressable } from "react-native";
@@ -10,14 +11,25 @@ type Props = {
     onPressStar: (starred: boolean) => void;
 };
 
-const ServiceItem = ({ service, starred, onPress, onPressStar }: Props) => {
+const ServiceItem = ({
+    service: {
+        PublicName,
+        PhysicalAddressStreet1,
+        PhysicalAddressCity,
+        PhysicalAddressProvince,
+    },
+    starred,
+    onPress,
+    onPressStar,
+}: Props) => {
+    const location = `${PhysicalAddressStreet1}, ${PhysicalAddressCity}, ${PhysicalAddressProvince}`;
     return (
         <Pressable onPress={onPress} style={styles.container}>
             <Text style={[{ fontWeight: "bold" }]} numberOfLines={1}>
-                {service.PublicName}
+                {PublicName}
             </Text>
             <Text style={[{ opacity: 0.7, fontSize: 12, marginTop: 10 }]}>
-                {service.PhysicalAddressStreet1}
+                {location}
             </Text>
             <Pressable style={styles.star} onPress={() => onPressStar(starred)}>
                 <FontAwesome

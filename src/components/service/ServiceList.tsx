@@ -1,5 +1,6 @@
 import ServiceItem from "@components/service/ServiceItem";
-import useFavourites from "@hooks/useFavourites";
+import useServices, { Service } from "@hooks/useServices";
+import { ScreenParameters } from "@navigation/ScreenOptions";
 import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
@@ -10,7 +11,7 @@ type Props = {
 
 const ServiceList = ({ services }: Props) => {
     const { useFindFavourites, useAddFavourite, useRemoveFavourite } =
-        useFavourites();
+        useServices();
     const { data: favourites } = useFindFavourites;
     const navigation = useNavigation<DrawerNavigationProp<ScreenParameters>>();
 

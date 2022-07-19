@@ -21,14 +21,7 @@ function App() {
 
     return (
         <QueryClientProvider client={queryClient}>
-            <View
-                style={{ flex: 1 }}
-                onLayout={() => {
-                    void (async () => {
-                        await onLayoutRootView();
-                    })();
-                }}
-            >
+            <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
                 <Navigation />
             </View>
         </QueryClientProvider>

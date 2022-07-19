@@ -1,14 +1,36 @@
 import theme from "@constants/theme";
 import { FontAwesome5 } from "@expo/vector-icons";
-import { DrawerNavigationOptions } from "@react-navigation/drawer";
+import { Service } from "@hooks/useServices";
+import {
+    DrawerNavigationOptions,
+    DrawerNavigationProp,
+} from "@react-navigation/drawer";
 import { RouteProp } from "@react-navigation/native";
+import React from "react";
 import { Pressable } from "react-native";
+
+export type ScreenParameters = {
+    Home: undefined;
+    Topics: undefined;
+    Search: undefined;
+    Favourites: undefined;
+    Topic: {
+        name: string;
+    };
+    Service: {
+        service: Service;
+    };
+};
 
 export const mainOptions:
     | DrawerNavigationOptions
     | ((props: {
           route: RouteProp<ScreenParameters, keyof ScreenParameters>;
-          navigation: any;
+          navigation: DrawerNavigationProp<
+              ScreenParameters,
+              keyof ScreenParameters,
+              undefined
+          >;
       }) => DrawerNavigationOptions)
     | undefined = ({ navigation }) => ({
     headerTitle: "",
@@ -40,7 +62,11 @@ export const pageOptions:
     | DrawerNavigationOptions
     | ((props: {
           route: RouteProp<ScreenParameters, keyof ScreenParameters>;
-          navigation: any;
+          navigation: DrawerNavigationProp<
+              ScreenParameters,
+              keyof ScreenParameters,
+              undefined
+          >;
       }) => DrawerNavigationOptions)
     | undefined = ({ navigation }) => ({
     headerTitle: "",

@@ -1,7 +1,8 @@
 import ServiceList from "@components/service/ServiceList";
 import Button from "@components/ui/Button";
 import theme from "@constants/theme";
-import useFavourites from "@hooks/useFavourites";
+import useServices from "@hooks/useServices";
+import { ScreenParameters } from "@navigation/ScreenOptions";
 import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { useNavigation } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
@@ -9,7 +10,7 @@ import { View, Text, StyleSheet } from "react-native";
 
 const FavouritesSection = () => {
     const navigation = useNavigation<DrawerNavigationProp<ScreenParameters>>();
-    const { useFindFavourites } = useFavourites();
+    const { useFindFavourites } = useServices();
     const { data: favourites } = useFindFavourites;
     const [showFavourites, setShowFavourites] = useState(false);
 

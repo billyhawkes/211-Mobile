@@ -1,9 +1,8 @@
+import theme from "@constants/theme";
 import React from "react";
 import { Pressable, View, Text, StyleSheet } from "react-native";
 
 import serviceStyles from "./styles";
-
-import theme from "@constants/theme";
 
 type Props = {
     link: string;

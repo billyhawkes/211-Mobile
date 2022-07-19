@@ -9,12 +9,14 @@ const useLinkOut = () => {
         console.log(number);
     };
 
-    const maps = async (postalCode: string) => {
+    const maps = (postalCode: string) => {
         const url = `https://www.google.com/maps/search/?api=1&query=${postalCode.slice(
             0,
             3
         )}+${postalCode.slice(-3)}`;
-        await Linking.openURL(url);
+        Linking.openURL(url).catch(() => {
+            console.log("Failed to link out to maps.");
+        });
     };
 
     return { call, text, maps };
