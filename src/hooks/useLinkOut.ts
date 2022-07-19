@@ -1,15 +1,20 @@
-import { EMAIL_211_LINK, PHONE_211_NUMBER } from "@env";
 import * as Linking from "expo-linking";
 
 const useLinkOut = () => {
-    const call = () => {
-        Linking.openURL(`tel:+1 ${PHONE_211_NUMBER}`).catch(() => {
+    const call = (number: string) => {
+        Linking.openURL(`tel:+1 ${number}`).catch(() => {
             console.log("Failed to start call.");
         });
     };
 
-    const email = () => {
-        Linking.openURL(`${EMAIL_211_LINK}`).catch(() => {
+    const email = (email: string) => {
+        Linking.openURL(`mailto: ${email}`).catch(() => {
+            console.log("Failed to link out to email page.");
+        });
+    };
+
+    const website = (link: string) => {
+        Linking.openURL(link).catch(() => {
             console.log("Failed to link out to email page.");
         });
     };
@@ -24,7 +29,7 @@ const useLinkOut = () => {
         });
     };
 
-    return { call, email, maps };
+    return { call, email, website, maps };
 };
 
 export default useLinkOut;

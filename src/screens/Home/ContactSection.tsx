@@ -1,5 +1,6 @@
 import Button from "@components/ui/Button";
 import theme from "@constants/theme";
+import { EMAIL_211_LINK, PHONE_211_NUMBER } from "@env";
 import useLinkOut from "@hooks/useLinkOut";
 import React from "react";
 import { View, StyleSheet } from "react-native";
@@ -10,12 +11,16 @@ const ContactSection = () => {
         <View style={styles.container}>
             <Button
                 primary
-                onPress={() => call()}
+                onPress={() => call(`${PHONE_211_NUMBER}`)}
                 style={{ marginRight: theme.spacing["md"], flex: 1 }}
             >
                 CALL US
             </Button>
-            <Button primary onPress={() => email()} style={{ flex: 1 }}>
+            <Button
+                primary
+                onPress={() => email(`${EMAIL_211_LINK}`)}
+                style={{ flex: 1 }}
+            >
                 EMAIL US
             </Button>
         </View>

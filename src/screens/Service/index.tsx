@@ -34,7 +34,7 @@ const Service = ({
     } = service;
 
     const location = `${PhysicalAddressStreet1}, ${PhysicalAddressCity}, ${PhysicalAddressProvince}`;
-    const { maps } = useLinkOut();
+    const { maps, call, email, website } = useLinkOut();
     const { useAddFavourite, useRemoveFavourite, isFavourite } = useServices();
 
     useEffect(() => {
@@ -75,9 +75,7 @@ const Service = ({
                               hr
                               link={Phone}
                               title={Name}
-                              onPress={() => {
-                                  console.log(Phone, ": TODO");
-                              }}
+                              onPress={() => call(Phone)}
                               icon={
                                   <FontAwesome5
                                       name="phone-alt"
@@ -93,9 +91,7 @@ const Service = ({
                     <LinkSection
                         hr
                         link={Website}
-                        onPress={() => {
-                            console.log(Website, ": TODO");
-                        }}
+                        onPress={() => website(Website)}
                         icon={
                             <FontAwesome5
                                 name="globe"
@@ -109,9 +105,7 @@ const Service = ({
                     <LinkSection
                         hr
                         link={Email}
-                        onPress={() => {
-                            console.log(Email, ": TODO");
-                        }}
+                        onPress={() => email(Email)}
                         icon={
                             <FontAwesome5
                                 name="envelope"
