@@ -1,4 +1,5 @@
 import theme from "@constants/theme";
+import { ScreenParameters } from "@navigation/ScreenOptions";
 import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";

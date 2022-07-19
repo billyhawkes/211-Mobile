@@ -6,7 +6,7 @@ import { View, Text, StyleSheet, Animated, Pressable } from "react-native";
 
 type Props = {
     service: Service;
-    starred: boolean;
+    starred?: boolean;
     onPress: () => void;
     onPressStar: (starred: boolean) => void;
 };
@@ -18,7 +18,7 @@ const ServiceItem = ({
         PhysicalAddressCity,
         PhysicalAddressProvince,
     },
-    starred,
+    starred = false,
     onPress,
     onPressStar,
 }: Props) => {

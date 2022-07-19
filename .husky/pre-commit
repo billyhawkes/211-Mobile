@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "Styling and testing before commit!"
+
+npm run check-types || (echo "Failed type check." false;)
+
+npm run check-lint || (echo "Failed lint check." false;)
+
+npm run check-format || (echo "Failed format check." false;)
+
+echo "All checks passed!"
+

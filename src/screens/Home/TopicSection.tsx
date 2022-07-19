@@ -2,6 +2,7 @@ import TopicIcon from "@components/topic/TopicIcon";
 import Button from "@components/ui/Button";
 import { TopicList } from "@constants/TopicList";
 import theme from "@constants/theme";
+import { ScreenParameters } from "@navigation/ScreenOptions";
 import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
