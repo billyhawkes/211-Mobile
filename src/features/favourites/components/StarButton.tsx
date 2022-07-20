@@ -1,16 +1,27 @@
 import { FontAwesome } from "@expo/vector-icons";
+import { Service } from "@typesGlobal/service";
 import React from "react";
 import { Pressable, StyleSheet } from "react-native";
 
+import useFavourites from "../hooks/useFavourites";
+
 type Props = {
-    starred: boolean;
+    service: Service;
     size: number;
-    onPress: (starred: boolean) => void;
 };
 
-const StarButton = ({ starred, size, onPress }: Props) => {
+const StarButton = ({ service, size }: Props) => {
+    const { isFavourite, useAddFavourite, useRemoveFavourite } =
+        useFavourites();
+    const starred = isFavourite(service.id);
+
+    const onPressHandler = () =>
+        starred
+            ? useRemoveFavourite.mutate(service)
+            : useAddFavourite.mutate(service);
+
     return (
-        <Pressable style={styles.star} onPress={() => onPress(starred)}>
+        <Pressable style={styles.star} onPress={onPressHandler}>
             <FontAwesome
                 name={starred ? "star" : "star-o"}
                 size={size}

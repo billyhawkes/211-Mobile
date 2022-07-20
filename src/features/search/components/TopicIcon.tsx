@@ -1,5 +1,5 @@
 import theme from "@constants/theme";
-import { ScreenParameters } from "@navigation/ScreenOptions";
+import { ScreenProps } from "@features/navigation";
 import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
@@ -11,7 +11,7 @@ export type TopicIconType = {
 };
 
 const TopicIcon = ({ name, icon }: TopicIconType) => {
-    const navigation = useNavigation<DrawerNavigationProp<ScreenParameters>>();
+    const navigation = useNavigation<DrawerNavigationProp<ScreenProps>>();
     return (
         <Pressable
             style={styles.container}

@@ -1,6 +1,5 @@
 import theme from "@constants/theme";
 import { FontAwesome5 } from "@expo/vector-icons";
-import { Service } from "@hooks/useServices";
 import {
     DrawerNavigationOptions,
     DrawerNavigationProp,
@@ -9,26 +8,15 @@ import { RouteProp } from "@react-navigation/native";
 import React from "react";
 import { Pressable } from "react-native";
 
-export type ScreenParameters = {
-    Home: undefined;
-    Topics: undefined;
-    Search: undefined;
-    Favourites: undefined;
-    Topic: {
-        name: string;
-    };
-    Service: {
-        service: Service;
-    };
-};
+import { ScreenProps } from "../types/ScreenProps";
 
 export const mainOptions:
     | DrawerNavigationOptions
     | ((props: {
-          route: RouteProp<ScreenParameters, keyof ScreenParameters>;
+          route: RouteProp<ScreenProps, keyof ScreenProps>;
           navigation: DrawerNavigationProp<
-              ScreenParameters,
-              keyof ScreenParameters,
+              ScreenProps,
+              keyof ScreenProps,
               undefined
           >;
       }) => DrawerNavigationOptions)
@@ -61,10 +49,10 @@ export const mainOptions:
 export const pageOptions:
     | DrawerNavigationOptions
     | ((props: {
-          route: RouteProp<ScreenParameters, keyof ScreenParameters>;
+          route: RouteProp<ScreenProps, keyof ScreenProps>;
           navigation: DrawerNavigationProp<
-              ScreenParameters,
-              keyof ScreenParameters,
+              ScreenProps,
+              keyof ScreenProps,
               undefined
           >;
       }) => DrawerNavigationOptions)

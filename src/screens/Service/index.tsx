@@ -1,9 +1,8 @@
-import ScreenContainer from "@components/layouts/ScreenContainer";
-import StarButton from "@components/services/StarButton";
+import ScreenContainer from "@components/ScreenContainer";
 import { FontAwesome5 } from "@expo/vector-icons";
+import { StarButton } from "@features/favourites";
+import { ScreenProps } from "@features/navigation";
 import useLinkOut from "@hooks/useLinkOut";
-import useServices from "@hooks/useServices";
-import { ScreenParameters } from "@navigation/ScreenOptions";
 import { DrawerScreenProps } from "@react-navigation/drawer";
 import React, { useEffect } from "react";
 import { Text, View } from "react-native";
@@ -15,11 +14,10 @@ import styles from "./styles";
 const Service = ({
     route,
     navigation,
-}: DrawerScreenProps<ScreenParameters, "Service">) => {
+}: DrawerScreenProps<ScreenProps, "Service">) => {
     const { service } = route.params;
 
     const {
-        id,
         PublicName,
         PhysicalAddressPostalCode,
         PhysicalAddressStreet1,
@@ -35,30 +33,12 @@ const Service = ({
 
     const location = `${PhysicalAddressStreet1}, ${PhysicalAddressCity}, ${PhysicalAddressProvince}`;
     const { maps, call, email, website } = useLinkOut();
-    const { useAddFavourite, useRemoveFavourite, isFavourite } = useServices();
 
     useEffect(() => {
         navigation.setOptions({
-            headerRight: () => (
-                <StarButton
-                    starred={isFavourite(id)}
-                    size={24}
-                    onPress={(starred) =>
-                        starred
-                            ? useRemoveFavourite.mutate(service)
-                            : useAddFavourite.mutate(service)
-                    }
-                />
-            ),
+            headerRight: () => <StarButton service={service} size={24} />,
         });
-    }, [
-        navigation,
-        useAddFavourite,
-        useRemoveFavourite,
-        service,
-        isFavourite,
-        id,
-    ]);
+    }, [navigation, service]);
 
     return (
         <ScreenContainer>

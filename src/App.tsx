@@ -1,14 +1,11 @@
 import "react-native-gesture-handler";
-import { OPEN_STORYBOOK } from "@env";
+import { Navigation } from "@features/navigation";
 import useLoadResources from "@hooks/useLoadResources";
 import useLocation from "@hooks/useLocation";
-import Navigation from "@navigation/index";
 import { registerRootComponent } from "expo";
 import React from "react";
 import { View } from "react-native";
 import { QueryClient, QueryClientProvider } from "react-query";
-
-import StorybookUI from "../storybook";
 
 function App() {
     const { resLoaded, onLayoutRootView } = useLoadResources();
@@ -28,6 +25,4 @@ function App() {
     );
 }
 
-export default OPEN_STORYBOOK === "true"
-    ? StorybookUI
-    : registerRootComponent(App);
+export default registerRootComponent(App);

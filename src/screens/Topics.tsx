@@ -1,6 +1,5 @@
-import ScreenContainer from "@components/layouts/ScreenContainer";
-import TopicIcon from "@components/services/TopicIcon";
-import { TopicList } from "@constants/TopicList";
+import ScreenContainer from "@components/ScreenContainer";
+import { TopicIcon, TopicList } from "@features/search";
 import React from "react";
 import { View, StyleSheet } from "react-native";
 

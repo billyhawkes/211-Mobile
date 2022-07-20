@@ -1,4 +1,4 @@
-import ScreenContainer from "@components/layouts/ScreenContainer";
+import ScreenContainer from "@components/ScreenContainer";
 import React from "react";
 
 import ContactSection from "./ContactSection";

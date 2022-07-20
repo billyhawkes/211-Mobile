@@ -1,9 +1,10 @@
-import { TopicIconType } from "@components/services/TopicIcon";
 import theme from "@constants/theme";
 import { FontAwesome5 } from "@expo/vector-icons";
 import React from "react";
 
-export const TopicList: TopicIconType[] = [
+import { TopicIconType } from "../components/TopicIcon";
+
+const TopicList: TopicIconType[] = [
     {
         name: "Food",
         icon: (
@@ -151,3 +152,5 @@ export const TopicList: TopicIconType[] = [
         ),
     },
 ];
+
+export default TopicList;

@@ -7,9 +7,12 @@
             "@components/*": ["./src/components/*"],
             "@constants/*": ["./src/constants/*"],
             "@hooks/*": ["./src/hooks/*"],
-            "@navigation/*": ["./src/navigation/*"],
-            "@screens/*": ["./src/screens/*"]
+            "@navigation/*": ["src/features/navigation/*"],
+            "@assets/*": ["./src/assets/*"],
+            "@screens/*": ["./src/screens/*"],
+            "@typesGlobal/*": ["./src/types/*"],
+            "@features/*": ["./src/features/*"]
         }
     },
-    "include": ["src/**/*", "storybook/**/*"]
+    "include": ["src/**/*"]
 }

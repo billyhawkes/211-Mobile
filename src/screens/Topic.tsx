@@ -1,16 +1,15 @@
-import ScreenContainer from "@components/layouts/ScreenContainer";
-import SearchState from "@components/services/SearchState";
-import ServiceList from "@components/services/ServiceList";
+import ScreenContainer from "@components/ScreenContainer";
+import ServiceList from "@components/ServiceList";
+import { ScreenProps } from "@features/navigation";
+import { SearchState, useSearch } from "@features/search";
 import useLocation from "@hooks/useLocation";
-import useServices from "@hooks/useServices";
-import { ScreenParameters } from "@navigation/ScreenOptions";
 import { DrawerScreenProps } from "@react-navigation/drawer";
 import React from "react";
 
-function Topic({ route }: DrawerScreenProps<ScreenParameters, "Topic">) {
+function Topic({ route }: DrawerScreenProps<ScreenProps, "Topic">) {
     const { name } = route.params;
     const { location } = useLocation();
-    const { useTopicSearch } = useServices();
+    const { useTopicSearch } = useSearch();
     const { data, isLoading, isError } = useTopicSearch(name, location);
 
     return (

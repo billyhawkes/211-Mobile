@@ -1,36 +1,29 @@
-import ServiceItem from "@components/services/ServiceItem";
-import useServices, { Service } from "@hooks/useServices";
-import { ScreenParameters } from "@navigation/ScreenOptions";
+import { ScreenProps } from "@features/navigation";
 import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { useNavigation } from "@react-navigation/native";
+import { Service } from "@typesGlobal/service";
 import React from "react";
+
+import ServiceItem from "./ServiceItem";
 
 type Props = {
     services: Service[];
 };
 
 const ServiceList = ({ services }: Props) => {
-    const { useAddFavourite, useRemoveFavourite, isFavourite } = useServices();
-    const navigation = useNavigation<DrawerNavigationProp<ScreenParameters>>();
+    const navigation = useNavigation<DrawerNavigationProp<ScreenProps>>();
 
     return (
         <>
             {services.map((service) => {
-                const favourite = isFavourite(service.id);
                 return (
                     <ServiceItem
                         key={service.id}
                         service={service}
-                        starred={favourite}
                         onPress={() =>
                             navigation.navigate("Service", {
                                 service,
                             })
-                        }
-                        onPressStar={(starred) =>
-                            starred
-                                ? useRemoveFavourite.mutate(service)
-                                : useAddFavourite.mutate(service)
                         }
                     />
                 );

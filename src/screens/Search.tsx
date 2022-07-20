@@ -1,9 +1,8 @@
-import ScreenContainer from "@components/layouts/ScreenContainer";
-import SearchState from "@components/services/SearchState";
-import ServiceList from "@components/services/ServiceList";
+import ScreenContainer from "@components/ScreenContainer";
+import ServiceList from "@components/ServiceList";
 import theme from "@constants/theme";
+import { SearchState, useSearch } from "@features/search";
 import useLocation from "@hooks/useLocation";
-import useServices from "@hooks/useServices";
 import React from "react";
 import { useForm, Controller } from "react-hook-form";
 import { TextInput, StyleSheet } from "react-native";
@@ -14,7 +13,7 @@ type FormData = {
 
 const Search = () => {
     const { control, getValues } = useForm<FormData>();
-    const { useKeywordSearch } = useServices();
+    const { useKeywordSearch } = useSearch();
     const { location } = useLocation();
     const { data, isLoading, isError, isIdle, refetch } = useKeywordSearch(
         getValues("keyword"),

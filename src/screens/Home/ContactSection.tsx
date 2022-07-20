@@ -1,4 +1,4 @@
-import Button from "@components/ui/Button";
+import Button from "@components/Button";
 import theme from "@constants/theme";
 import { EMAIL_211_LINK, PHONE_211_NUMBER } from "@env";
 import useLinkOut from "@hooks/useLinkOut";

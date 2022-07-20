@@ -1,15 +1,14 @@
-import TopicIcon from "@components/services/TopicIcon";
-import Button from "@components/ui/Button";
-import { TopicList } from "@constants/TopicList";
+import Button from "@components/Button";
 import theme from "@constants/theme";
-import { ScreenParameters } from "@navigation/ScreenOptions";
+import { ScreenProps } from "@features/navigation";
+import { TopicIcon, TopicList } from "@features/search";
 import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { View, StyleSheet, Text } from "react-native";
 
 const TopicSection = () => {
-    const navigation = useNavigation<DrawerNavigationProp<ScreenParameters>>();
+    const navigation = useNavigation<DrawerNavigationProp<ScreenProps>>();
     return (
         <View>
             <View style={styles.header}>
@@ -39,7 +38,7 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         alignItems: "center",
         flexDirection: "row",
-        marginBottom: 20,
+        marginBottom: theme.spacing.lg,
     },
 });
 

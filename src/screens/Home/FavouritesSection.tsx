@@ -1,31 +1,17 @@
-import ServiceList from "@components/services/ServiceList";
-import Button from "@components/ui/Button";
+import Button from "@components/Button";
 import theme from "@constants/theme";
-import useServices from "@hooks/useServices";
-import { ScreenParameters } from "@navigation/ScreenOptions";
+import { FavouritesList } from "@features/favourites";
+import { ScreenProps } from "@features/navigation";
 import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { useNavigation } from "@react-navigation/native";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
 const FavouritesSection = () => {
-    const navigation = useNavigation<DrawerNavigationProp<ScreenParameters>>();
-    const { useFindFavourites } = useServices();
-    const { data: favourites } = useFindFavourites;
-    const [showFavourites, setShowFavourites] = useState(false);
-
-    useEffect(() => {
-        if (favourites && favourites.length > 0) {
-            setShowFavourites(true);
-        } else {
-            setShowFavourites(false);
-        }
-    }, [favourites]);
-
-    if (!showFavourites) return <></>;
+    const navigation = useNavigation<DrawerNavigationProp<ScreenProps>>();
 
     return (
-        <View>
+        <View style={styles.container}>
             <View style={styles.header}>
                 <Text style={theme.textVariants.lg}>Favourites</Text>
                 <Button
@@ -35,20 +21,21 @@ const FavouritesSection = () => {
                     VIEW MORE
                 </Button>
             </View>
-            {favourites ? (
-                <ServiceList services={favourites.slice(0, 2)} />
-            ) : null}
+            <FavouritesList limit={2} />
         </View>
     );
 };
 
 const styles = StyleSheet.create({
+    container: {
+        marginBottom: theme.spacing.lg,
+    },
     header: {
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
         flexDirection: "row",
-        marginBottom: 20,
+        marginBottom: theme.spacing.lg,
     },
 });
 

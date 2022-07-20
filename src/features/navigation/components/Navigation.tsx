@@ -9,10 +9,11 @@ import Topic from "@screens/Topic";
 import Topics from "@screens/Topics";
 import React from "react";
 
+import { mainOptions, pageOptions } from "../config/ScreenOptions";
+import { ScreenProps } from "../types/ScreenProps";
 import DrawerContent from "./DrawerContent";
-import { mainOptions, pageOptions, ScreenParameters } from "./ScreenOptions";
 
-export const Drawer = createDrawerNavigator<ScreenParameters>();
+export const Drawer = createDrawerNavigator<ScreenProps>();
 
 const Navigation = () => {
     return (

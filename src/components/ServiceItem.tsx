@@ -1,29 +1,23 @@
-import { Service } from "@hooks/useServices";
+import theme from "@constants/theme";
 import useSkeleten from "@hooks/useSkeleten";
+import { Service } from "@typesGlobal/service";
 import React from "react";
 import { View, Text, StyleSheet, Animated, Pressable } from "react-native";
 
-import StarButton from "./StarButton";
-
 type Props = {
     service: Service;
-    starred?: boolean;
     onPress: () => void;
-    onPressStar: (starred: boolean) => void;
 };
 
-const ServiceItem = ({
-    service: {
+const ServiceItem = ({ service, onPress }: Props) => {
+    const {
         PublicName,
         PhysicalAddressStreet1,
         PhysicalAddressCity,
         PhysicalAddressProvince,
-    },
-    starred = false,
-    onPress,
-    onPressStar,
-}: Props) => {
+    } = service;
     const location = `${PhysicalAddressStreet1}, ${PhysicalAddressCity}, ${PhysicalAddressProvince}`;
+
     return (
         <Pressable onPress={onPress} style={styles.container}>
             <Text style={[{ fontWeight: "bold" }]} numberOfLines={1}>
@@ -32,11 +26,6 @@ const ServiceItem = ({
             <Text style={[{ opacity: 0.7, fontSize: 12, marginTop: 10 }]}>
                 {location}
             </Text>
-            <StarButton
-                starred={starred}
-                size={24}
-                onPress={() => onPressStar(starred)}
-            />
         </Pressable>
     );
 };
@@ -62,7 +51,7 @@ const styles = StyleSheet.create({
         width: "100%",
         padding: 15,
         paddingRight: 40,
-        marginBottom: 15,
+        marginBottom: theme.spacing.lg,
         borderRadius: 5,
         borderWidth: 1,
         borderColor: "#ccc",
