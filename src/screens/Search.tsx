@@ -1,11 +1,11 @@
-import ScreenContainer from "@components/ScreenContainer";
+import ScreenTitle from "@components/ScreenTitle";
 import ServiceList from "@components/ServiceList";
 import theme from "@constants/theme";
 import { SearchState, useSearch } from "@features/search";
 import useLocation from "@hooks/useLocation";
 import React from "react";
 import { useForm, Controller } from "react-hook-form";
-import { TextInput, StyleSheet } from "react-native";
+import { TextInput, StyleSheet, SafeAreaView } from "react-native";
 
 type FormData = {
     keyword: string;
@@ -25,7 +25,8 @@ const Search = () => {
     };
 
     return (
-        <ScreenContainer title="Search">
+        <SafeAreaView>
+            <ScreenTitle title="Search" />
             <Controller
                 control={control}
                 rules={{
@@ -53,18 +54,18 @@ const Search = () => {
             </>
             <>{isIdle ? <SearchState state="waiting-to-search" /> : null}</>
             <>{data ? <ServiceList services={data.Records} /> : null}</>
-        </ScreenContainer>
+        </SafeAreaView>
     );
 };
 
 const styles = StyleSheet.create({
     input: {
-        width: "100%",
         borderColor: "#ccc",
         borderWidth: 1,
         borderRadius: 5,
         paddingHorizontal: 15,
         marginBottom: 15,
+        marginHorizontal: theme.spacing.lg,
         height: theme.spacing.xl2,
     },
 });

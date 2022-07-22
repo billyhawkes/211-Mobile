@@ -18,6 +18,7 @@ const searchKeywordRequest = async (
     keyword: string,
     location: UserLocation | undefined
 ): Promise<ServiceResponse> => {
+    console.log(location);
     const res = await fetch(`${API_URL}`, {
         method: "Post",
         headers: {
@@ -28,8 +29,8 @@ const searchKeywordRequest = async (
             Dataset: "on",
             Lang: "en",
             SearchType: "proximity",
-            Latitude: 48.461312,
-            Longitude: -89.228477,
+            Latitude: location?.latitude ?? 43.6532,
+            Longitude: location?.longitude ?? -79.3832,
             Distance: 100,
             Search: "term",
             PageSize: 1000,
@@ -54,8 +55,8 @@ const searchTopicRequest = async (
             Dataset: "on",
             Lang: "en",
             SearchType: "proximity",
-            Latitude: 48.461312,
-            Longitude: -89.228477,
+            Latitude: location?.latitude ?? 43.6532,
+            Longitude: location?.longitude ?? -79.3832,
             Distance: 100,
             Search: "match",
             MatchMode: "taxterm",

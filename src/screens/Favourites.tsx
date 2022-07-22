@@ -1,12 +1,15 @@
-import ScreenContainer from "@components/ScreenContainer";
+import ScreenTitle from "@components/ScreenTitle";
+import theme from "@constants/theme";
 import { FavouritesList } from "@features/favourites";
 import React from "react";
+import { SafeAreaView } from "react-native";
 
 const Favourites = () => {
     return (
-        <ScreenContainer title="Favourites">
+        <SafeAreaView style={{ paddingHorizontal: theme.spacing.lg }}>
+            <ScreenTitle title="Favourites" />
             <FavouritesList />
-        </ScreenContainer>
+        </SafeAreaView>
     );
 };
 

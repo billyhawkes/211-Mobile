@@ -16,7 +16,7 @@ const ServiceItem = ({ service, onPress }: Props) => {
         PhysicalAddressCity,
         PhysicalAddressProvince,
     } = service;
-    const location = `${PhysicalAddressStreet1}, ${PhysicalAddressCity}, ${PhysicalAddressProvince}`;
+    const location = `${PhysicalAddressStreet1} ${PhysicalAddressCity} ${PhysicalAddressProvince}`;
 
     return (
         <Pressable onPress={onPress} style={styles.container}>

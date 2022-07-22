@@ -1,11 +1,11 @@
-import ScreenContainer from "@components/ScreenContainer";
+import theme from "@constants/theme";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { StarButton } from "@features/favourites";
 import { ScreenProps } from "@features/navigation";
 import useLinkOut from "@hooks/useLinkOut";
 import { DrawerScreenProps } from "@react-navigation/drawer";
 import React, { useEffect } from "react";
-import { Text, View } from "react-native";
+import { ScrollView, Text, View } from "react-native";
 
 import InfoSection from "./InfoSection";
 import LinkSection from "./LinkSection";
@@ -31,7 +31,7 @@ const Service = ({
         Hours,
     } = service;
 
-    const location = `${PhysicalAddressStreet1}, ${PhysicalAddressCity}, ${PhysicalAddressProvince}`;
+    const location = `${PhysicalAddressStreet1} ${PhysicalAddressCity} ${PhysicalAddressProvince}`;
     const { maps, call, email, website } = useLinkOut();
 
     useEffect(() => {
@@ -41,8 +41,10 @@ const Service = ({
     }, [navigation, service]);
 
     return (
-        <ScreenContainer>
-            <Text style={[styles.header]}>{PublicName}</Text>
+        <ScrollView style={{ paddingHorizontal: theme.spacing.lg }}>
+            <Text style={[styles.header, { marginTop: theme.spacing.lg }]}>
+                {PublicName}
+            </Text>
             <View style={[styles.outerContainer, { paddingVertical: 0 }]}>
                 <LinkSection
                     link={location}
@@ -107,7 +109,7 @@ const Service = ({
                     <InfoSection title={"Last Updated"} text={UpdatedOn} />
                 ) : null}
             </>
-        </ScreenContainer>
+        </ScrollView>
     );
 };
 

@@ -7,7 +7,6 @@
             "@components/*": ["./src/components/*"],
             "@constants/*": ["./src/constants/*"],
             "@hooks/*": ["./src/hooks/*"],
-            "@navigation/*": ["src/features/navigation/*"],
             "@assets/*": ["./src/assets/*"],
             "@screens/*": ["./src/screens/*"],
             "@typesGlobal/*": ["./src/types/*"],

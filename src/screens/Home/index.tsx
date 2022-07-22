@@ -1,5 +1,6 @@
-import ScreenContainer from "@components/ScreenContainer";
+import theme from "@constants/theme";
 import React from "react";
+import { ScrollView } from "react-native";
 
 import ContactSection from "./ContactSection";
 import FavouritesSection from "./FavouritesSection";
@@ -8,12 +9,12 @@ import TopicSection from "./TopicSection";
 
 const Home = () => {
     return (
-        <ScreenContainer>
+        <ScrollView style={{ paddingHorizontal: theme.spacing.lg }}>
             <MainImage />
             <ContactSection />
             <TopicSection />
             <FavouritesSection />
-        </ScreenContainer>
+        </ScrollView>
     );
 };
 

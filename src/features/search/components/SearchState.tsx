@@ -19,11 +19,11 @@ const SearchState = ({ state }: Props) => {
     switch (state) {
         case "loading":
             return (
-                <>
+                <View style={{ paddingHorizontal: theme.spacing.lg }}>
                     {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((listNumber) => (
                         <ServiceItemSkeleton key={listNumber} />
                     ))}
-                </>
+                </View>
             );
         case "not-found":
             return (

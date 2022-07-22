@@ -1,5 +1,8 @@
-import ServiceList from "@components/ServiceList";
+import ServiceItem from "@components/ServiceItem";
 import theme from "@constants/theme";
+import { ScreenProps } from "@features/navigation";
+import { DrawerNavigationProp } from "@react-navigation/drawer";
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { Text, StyleSheet } from "react-native";
 
@@ -11,12 +14,23 @@ type Props = {
 };
 
 const FavouritesList = ({ limit }: Props) => {
+    const navigation = useNavigation<DrawerNavigationProp<ScreenProps>>();
     const { useFindFavourites } = useFavourites();
     const { data: favourites } = useFindFavourites;
 
     return (
         <>
-            <ServiceList services={favourites?.slice(0, limit) ?? []} />
+            {favourites?.slice(0, limit).map((service) => (
+                <ServiceItem
+                    key={service.id}
+                    service={service}
+                    onPress={() =>
+                        navigation.navigate("Service", {
+                            service,
+                        })
+                    }
+                />
+            )) ?? null}
             <>
                 {favourites && favourites.length === 0 ? (
                     <>
