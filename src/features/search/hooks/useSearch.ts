@@ -32,6 +32,7 @@ const searchKeywordRequest = async (
             Longitude: -89.228477,
             Distance: 100,
             Search: "term",
+            PageSize: 1000,
             Term: keyword,
         }),
     });
@@ -58,6 +59,7 @@ const searchTopicRequest = async (
             Distance: 100,
             Search: "match",
             MatchMode: "taxterm",
+            PageSize: 1000,
             MatchTerms: topic,
         }),
     });
@@ -84,12 +86,8 @@ const useSearch = () => {
         topic: string,
         location: UserLocation | undefined
     ) => {
-        return useQuery<ServiceResponse, unknown>(
-            ["topic", topic],
-            () => searchTopicRequest(topic, location),
-            {
-                cacheTime: 100,
-            }
+        return useQuery<ServiceResponse, unknown>(["topic", topic], () =>
+            searchTopicRequest(topic, location)
         );
     };
 

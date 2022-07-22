@@ -1,5 +1,7 @@
 import { ServiceItemSkeleton } from "@components/ServiceItem";
 import theme from "@constants/theme";
+import { PHONE_211_NUMBER } from "@env";
+import useLinkOut from "@hooks/useLinkOut";
 import React from "react";
 import { Text, StyleSheet, Pressable, View } from "react-native";
 
@@ -12,6 +14,8 @@ type Props = {
 };
 
 const SearchState = ({ state }: Props) => {
+    const { call } = useLinkOut();
+
     switch (state) {
         case "loading":
             return (
@@ -39,7 +43,7 @@ const SearchState = ({ state }: Props) => {
                         >
                             No results found.
                         </Text>
-                        <Pressable>
+                        <Pressable onPress={() => call(PHONE_211_NUMBER)}>
                             <Text style={[theme.textVariants.md, styles.link]}>
                                 Try Calling!
                             </Text>
@@ -83,7 +87,8 @@ const styles = StyleSheet.create({
         textDecorationLine: "underline",
         color: theme.colors.link,
         textAlign: "center",
-        marginLeft: 4,
+        paddingVertical: theme.spacing.md,
+        paddingHorizontal: theme.spacing.sm,
     },
     noResultsContainer: {
         display: "flex",

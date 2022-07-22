@@ -6,7 +6,7 @@ export const ServiceSchema = z.object({
     ParentId: z.number(),
     Description: z.string(),
     Distance: z.number(),
-    Email: z.string().optional(),
+    Email: z.string(),
     Hours: z.string(),
     Hours2: z.string(),
     Latitude: z.number(),
@@ -28,7 +28,7 @@ export const ServiceSchema = z.object({
             Type: z.string(),
         })
         .array()
-        .optional(),
+        .nullable(),
     PhysicalAddressCity: z.string(),
     PhysicalAddressCountry: z.string(),
     PhysicalAddressPostalCode: z.string(),
@@ -39,8 +39,8 @@ export const ServiceSchema = z.object({
     RecordOwner: z.string(),
     Score: z.number(),
     ServiceArea: z.string().array(),
-    UpdatedOn: z.string(),
-    Website: z.string().url().optional(),
+    UpdatedOn: z.string().nullable(),
+    Website: z.string().url().nullable(),
 });
 
 export type Service = z.infer<typeof ServiceSchema>;

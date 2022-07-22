@@ -25,6 +25,7 @@
         "sourceType": "module",
         "project": "./tsconfig.json"
     },
+    "ignorePatterns": ["app.config.*"],
     "settings": {
         "import/resolver": {
             "node": {
