@@ -2,11 +2,15 @@ import * as Location from "expo-location";
 import { useEffect, useState } from "react";
 
 export type UserLocation = {
-    latitude: number;
-    longitude: number;
+    lat: number;
+    lng: number;
 };
 
 const useLocation = () => {
+    const defaultLocation = {
+        lat: 43.6532,
+        lng: -79.3832,
+    };
     const [location, setLocation] = useState<UserLocation | undefined>();
 
     useEffect(() => {
@@ -20,8 +24,8 @@ const useLocation = () => {
 
             const location = await Location.getCurrentPositionAsync({});
             setLocation({
-                latitude: location.coords.latitude,
-                longitude: location.coords.longitude,
+                lat: location.coords.latitude,
+                lng: location.coords.longitude,
             });
         };
         getGPSLocation().catch(() => {
@@ -29,7 +33,7 @@ const useLocation = () => {
         });
     }, []);
 
-    return { location };
+    return { location, defaultLocation };
 };
 
 export default useLocation;

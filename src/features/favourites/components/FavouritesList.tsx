@@ -50,8 +50,12 @@ const FavouritesList = ({ limit }: Props) => {
 };
 
 const styles = StyleSheet.create({
-    text: { opacity: 0.7, textAlign: "center", marginTop: theme.spacing.lg },
-    image: { marginTop: theme.spacing.xl3 },
+    text: {
+        opacity: 0.7,
+        textAlign: "center",
+        marginVertical: theme.spacing.lg,
+    },
+    image: { marginTop: theme.spacing.xl },
 });
 
 export default FavouritesList;

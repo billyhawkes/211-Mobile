@@ -5,11 +5,46 @@ import { ScreenProps } from "@features/navigation";
 import useLinkOut from "@hooks/useLinkOut";
 import { DrawerScreenProps } from "@react-navigation/drawer";
 import React, { useEffect } from "react";
-import { ScrollView, Text, View } from "react-native";
+import { Pressable, ScrollView, Text, View, StyleSheet } from "react-native";
 
-import InfoSection from "./InfoSection";
-import LinkSection from "./LinkSection";
-import styles from "./styles";
+const InfoSection = ({ title, text }: { title: string; text: string }) => {
+    return (
+        <>
+            <Text style={[styles.header]}>{title}</Text>
+            <View style={styles.outerContainer}>
+                <Text>{text}</Text>
+            </View>
+        </>
+    );
+};
+
+type LinkSectionProps = {
+    link: string;
+    title?: string;
+    icon: JSX.Element;
+    hr?: boolean;
+    onPress: () => void;
+};
+
+const LinkSection = ({ link, title, icon, hr, onPress }: LinkSectionProps) => {
+    return (
+        <>
+            {hr ? <View style={styles.innerBreak} /> : null}
+            <Pressable style={[styles.linkContainer]} onPress={onPress}>
+                <View style={{ marginRight: theme.spacing.md }}>{icon}</View>
+                {title ? (
+                    <Text style={{ fontWeight: "bold" }}>{title}:</Text>
+                ) : null}
+                <Text
+                    style={[styles.link, { marginLeft: 4 }]}
+                    numberOfLines={1}
+                >
+                    {link}
+                </Text>
+            </Pressable>
+        </>
+    );
+};
 
 const Service = ({
     route,
@@ -112,5 +147,47 @@ const Service = ({
         </ScrollView>
     );
 };
+
+const styles = StyleSheet.create({
+    centerContainer: {
+        width: "100%",
+        padding: 15,
+    },
+    outerContainer: {
+        width: "100%",
+        borderWidth: 1,
+        borderColor: "#ccc",
+        borderTopWidth: 0,
+        padding: 15,
+        marginBottom: 15,
+        borderBottomRightRadius: 5,
+        borderBottomLeftRadius: 5,
+    },
+    header: {
+        width: "100%",
+        paddingVertical: 10,
+        paddingHorizontal: 15,
+        backgroundColor: theme.colors.primary,
+        color: "#ffffff",
+        fontWeight: "bold",
+        borderTopLeftRadius: 5,
+        borderTopRightRadius: 5,
+    },
+    innerBreak: {
+        marginHorizontal: -15,
+        borderTopWidth: 1,
+        borderColor: "#ccc",
+    },
+    link: {
+        color: theme.colors.link,
+        textDecorationLine: "underline",
+    },
+    linkContainer: {
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        paddingVertical: 15,
+    },
+});
 
 export default Service;

@@ -82,7 +82,7 @@ const SearchState = ({ state }: Props) => {
 
 const styles = StyleSheet.create({
     text: { opacity: 0.7, textAlign: "center", marginTop: theme.spacing.xl },
-    image: { marginTop: theme.spacing.xl3 },
+    image: { marginTop: theme.spacing.xl },
     link: {
         textDecorationLine: "underline",
         color: theme.colors.link,

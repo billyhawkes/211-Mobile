@@ -9,9 +9,12 @@ import { SafeAreaView } from "react-native";
 
 function Topic({ route }: DrawerScreenProps<ScreenProps, "Topic">) {
     const { name } = route.params;
-    const { location } = useLocation();
+    const { location, defaultLocation } = useLocation();
     const { useTopicSearch } = useSearch();
-    const { data, isLoading, isError } = useTopicSearch(name, location);
+    const { data, isLoading, isError } = useTopicSearch(
+        name,
+        location ?? defaultLocation
+    );
 
     return (
         <SafeAreaView>

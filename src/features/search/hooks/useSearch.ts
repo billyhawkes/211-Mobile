@@ -1,5 +1,6 @@
 import { API_URL } from "@env";
 import { UserLocation } from "@hooks/useLocation";
+import { Filters } from "@screens/Search";
 import { ServiceSchema } from "@typesGlobal/service";
 import { useQuery } from "react-query";
 import z from "zod";
@@ -16,9 +17,9 @@ type ServiceResponse = z.infer<typeof serviceSearchResponseSchema>;
 // SERVICE FUNCTIONS & REQUESTS //
 const searchKeywordRequest = async (
     keyword: string,
-    location: UserLocation | undefined
+    { lat, lng }: UserLocation,
+    { distance, sortType }: Filters
 ): Promise<ServiceResponse> => {
-    console.log(location);
     const res = await fetch(`${API_URL}`, {
         method: "Post",
         headers: {
@@ -29,9 +30,10 @@ const searchKeywordRequest = async (
             Dataset: "on",
             Lang: "en",
             SearchType: "proximity",
-            Latitude: location?.latitude ?? 43.6532,
-            Longitude: location?.longitude ?? -79.3832,
-            Distance: 100,
+            Latitude: lat,
+            Longitude: lng,
+            SortOrder: sortType,
+            Distance: distance,
             Search: "term",
             PageSize: 1000,
             Term: keyword,
@@ -43,7 +45,7 @@ const searchKeywordRequest = async (
 
 const searchTopicRequest = async (
     topic: string,
-    location: UserLocation | undefined
+    { lat, lng }: UserLocation
 ): Promise<ServiceResponse> => {
     const res = await fetch(`${API_URL}`, {
         method: "Post",
@@ -55,8 +57,8 @@ const searchTopicRequest = async (
             Dataset: "on",
             Lang: "en",
             SearchType: "proximity",
-            Latitude: location?.latitude ?? 43.6532,
-            Longitude: location?.longitude ?? -79.3832,
+            Latitude: lat,
+            Longitude: lng,
             Distance: 100,
             Search: "match",
             MatchMode: "taxterm",
@@ -72,23 +74,22 @@ const searchTopicRequest = async (
 const useSearch = () => {
     const useKeywordSearch = (
         keyword: string,
-        location: UserLocation | undefined
+        location: UserLocation,
+        filters: Filters
     ) =>
         useQuery<ServiceResponse, unknown>(
-            ["keyword", keyword],
-            () => searchKeywordRequest(keyword, location),
+            ["keyword", keyword, location, filters],
+            () => searchKeywordRequest(keyword, location, filters),
             {
                 cacheTime: 0,
                 enabled: !!keyword && keyword !== "",
             }
         );
 
-    const useTopicSearch = (
-        topic: string,
-        location: UserLocation | undefined
-    ) => {
-        return useQuery<ServiceResponse, unknown>(["topic", topic], () =>
-            searchTopicRequest(topic, location)
+    const useTopicSearch = (topic: string, location: UserLocation) => {
+        return useQuery<ServiceResponse, unknown>(
+            ["topic", topic, location],
+            () => searchTopicRequest(topic, location)
         );
     };
 
