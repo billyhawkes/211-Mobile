@@ -1,8 +1,16 @@
+const pallete = {
+    primary: "#2179BE",
+    background: "#FFFFFF",
+    text: "#333",
+    border: "#ccc",
+};
+
 const theme = {
     colors: {
-        primary: "#2179BE",
-        link: "#0645AD",
-        background: "#FFFFFF",
+        primary: pallete.primary,
+        background: pallete.background,
+        text: pallete.text,
+        border: pallete.border,
     },
     spacing: {
         sm: 8,
@@ -13,28 +21,38 @@ const theme = {
         xl3: 48,
     },
     textVariants: {
-        sm: {
-            fontFamily: "Lato",
-            fontSize: 12,
-            lineHeight: 16,
-        },
-        md: {
+        default: {
             fontFamily: "Lato",
             fontSize: 14,
             lineHeight: 20,
         },
-        lg: {
+        link: {
+            fontFamily: "Lato",
+            fontSize: 14,
+            lineHeight: 20,
+            color: "blue",
+        },
+        paragraph: {
+            fontFamily: "Lato",
+            fontSize: 12,
+            lineHeight: 16,
+            opacity: 0.6,
+        },
+        header: {
             fontFamily: "Lato",
             fontSize: 16,
             lineHeight: 24,
         },
-        screenTitle: {
+        title: {
             fontFamily: "Lato",
             fontSize: 16,
             lineHeight: 24,
+            textAlign: "center",
             marginVertical: 16,
         },
     },
 };
+
+export type Theme = typeof theme;
 
 export default theme;

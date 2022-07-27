@@ -1,13 +1,13 @@
 import { ScreenProps } from "@components/Navigation";
 import ServiceItem from "@components/ServiceItem";
 import { ErrorFound, Loading, NotFound } from "@components/ServiceState";
-import theme from "@constants/theme";
+import Text from "@components/ui/Text";
 import { API_URL } from "@env";
 import useLocation, { UserLocation } from "@hooks/useLocation";
 import { DrawerScreenProps } from "@react-navigation/drawer";
 import { ServiceResponse, ServiceResponseSchema } from "@typesGlobal/service";
 import React from "react";
-import { FlatList, SafeAreaView, Text } from "react-native";
+import { FlatList, SafeAreaView } from "react-native";
 import { useQuery } from "react-query";
 
 const searchTopicRequest = async (
@@ -48,14 +48,7 @@ const Topic = ({ route }: DrawerScreenProps<ScreenProps, "Topic">) => {
 
     return (
         <SafeAreaView>
-            <Text
-                style={[
-                    theme.textVariants.screenTitle,
-                    { textAlign: "center" },
-                ]}
-            >
-                {name}
-            </Text>
+            <Text type="title">{name}</Text>
             {isLoading ? (
                 <Loading skeletons={10} />
             ) : isError ? (

@@ -1,5 +1,6 @@
 import ServiceItem from "@components/ServiceItem";
 import { ErrorFound, Idle, Loading, NotFound } from "@components/ServiceState";
+import Text from "@components/ui/Text";
 import theme from "@constants/theme";
 import { API_URL } from "@env";
 import { FontAwesome5 } from "@expo/vector-icons";
@@ -26,7 +27,6 @@ import {
     SafeAreaView,
     Pressable,
     View,
-    Text,
     FlatList,
 } from "react-native";
 import { useQuery } from "react-query";
@@ -88,14 +88,7 @@ const FilterContent = (props: DrawerContentComponentProps) => {
                 marginHorizontal: theme.spacing.lg,
             }}
         >
-            <Text
-                style={[
-                    theme.textVariants.screenTitle,
-                    { textAlign: "center" },
-                ]}
-            >
-                Refine
-            </Text>
+            <Text type="title">Refine</Text>
             <Controller
                 control={control}
                 rules={{
@@ -105,16 +98,32 @@ const FilterContent = (props: DrawerContentComponentProps) => {
                     <View style={styles.filterRow}>
                         <Text>Sort Type</Text>
                         <Picker
-                            style={{ flex: 1 }}
+                            style={{ marginHorizontal: -8 }}
                             onBlur={onBlur}
                             selectedValue={value}
                             onValueChange={(itemValue) => {
                                 setValue("filters.sortType", itemValue);
                             }}
+                            mode="dropdown"
                         >
-                            <Picker.Item label="Best" value="best" />
-                            <Picker.Item label="Distance" value="distance" />
-                            <Picker.Item label="Name" value="name" />
+                            <Picker.Item
+                                label="Best"
+                                value="best"
+                                style={theme.textVariants.default}
+                                fontFamily="Lato"
+                            />
+                            <Picker.Item
+                                label="Distance"
+                                value="distance"
+                                style={theme.textVariants.default}
+                                fontFamily="Lato"
+                            />
+                            <Picker.Item
+                                label="Name"
+                                value="name"
+                                style={theme.textVariants.default}
+                                fontFamily="Lato"
+                            />
                         </Picker>
                     </View>
                 )}
@@ -126,22 +135,32 @@ const FilterContent = (props: DrawerContentComponentProps) => {
                     required: true,
                 }}
                 render={({ field: { value } }) => (
-                    <View style={[styles.filterRow, { borderBottomWidth: 1 }]}>
+                    <View style={styles.filterRow}>
                         <Text>Distance</Text>
-                        <Slider
-                            style={{ height: theme.spacing.xl2, flex: 1 }}
-                            minimumValue={1}
-                            maximumValue={100}
-                            minimumTrackTintColor="#999"
-                            thumbTintColor={theme.colors.primary}
-                            step={1}
-                            maximumTrackTintColor="#aaa"
-                            value={value}
-                            onSlidingComplete={(value) =>
-                                setValue("filters.distance", value)
-                            }
-                        />
-                        <Text>{value} km</Text>
+                        <View
+                            style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                alignItems: "center",
+                                marginLeft: -15,
+                                marginTop: theme.spacing.md,
+                            }}
+                        >
+                            <Slider
+                                style={{ height: theme.spacing.xl2, flex: 1 }}
+                                minimumValue={1}
+                                maximumValue={100}
+                                minimumTrackTintColor="#999"
+                                thumbTintColor={theme.colors.primary}
+                                step={1}
+                                maximumTrackTintColor="#aaa"
+                                value={value}
+                                onSlidingComplete={(value) =>
+                                    setValue("filters.distance", value)
+                                }
+                            />
+                            <Text>{value} km</Text>
+                        </View>
                     </View>
                 )}
                 name="filters.distance"
@@ -215,14 +234,7 @@ const Search = ({
 
     return (
         <SafeAreaView>
-            <Text
-                style={[
-                    theme.textVariants.screenTitle,
-                    { textAlign: "center" },
-                ]}
-            >
-                Search
-            </Text>
+            <Text type="title">Search</Text>
             <View
                 style={{
                     display: "flex",
@@ -276,6 +288,7 @@ const Search = ({
                 <FlatList
                     data={data.Records}
                     renderItem={({ item }) => <ServiceItem service={item} />}
+                    style={{ marginHorizontal: theme.spacing.lg }}
                 />
             ) : null}
         </SafeAreaView>
@@ -284,21 +297,18 @@ const Search = ({
 
 const styles = StyleSheet.create({
     input: {
-        borderColor: "#ccc",
-        borderWidth: 1,
         flex: 1,
         borderRadius: 5,
         paddingHorizontal: theme.spacing.lg,
         height: theme.spacing.xl2,
+        borderWidth: 1,
+        borderColor: theme.colors.border,
     },
     filterRow: {
         display: "flex",
-        flexDirection: "row",
-        alignItems: "center",
+        flexDirection: "column",
         justifyContent: "space-between",
-        borderTopWidth: 1,
-        borderColor: "#ccc",
-        height: theme.spacing.xl3,
+        paddingVertical: theme.spacing.lg,
     },
 });
 

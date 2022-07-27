@@ -1,9 +1,10 @@
+import Text from "@components/ui/Text";
 import theme from "@constants/theme";
 import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { useNavigation } from "@react-navigation/native";
 import { ServiceRecord } from "@typesGlobal/service";
 import React, { useEffect, useRef } from "react";
-import { View, Text, StyleSheet, Animated, Pressable } from "react-native";
+import { View, StyleSheet, Animated, Pressable } from "react-native";
 
 import { ScreenProps } from "./Navigation";
 import StarButton from "./StarButton";
@@ -38,10 +39,7 @@ export const ServiceItemSkeleton = () => {
         <View style={styles.skeletonContainer}>
             <Animated.View style={[styles.skeleton, { opacity }]} />
             <Animated.View
-                style={[
-                    styles.skeleton,
-                    { height: 10, width: "40%", opacity, marginTop: 10 },
-                ]}
+                style={[styles.skeleton, { height: 10, width: "40%", opacity }]}
             />
         </View>
     );
@@ -72,20 +70,8 @@ const ServiceItem = ({ service }: Props) => {
             onPress={() => navigateToServicePage(service)}
             style={styles.container}
         >
-            <Text
-                style={[theme.textVariants.md, { fontWeight: "bold" }]}
-                numberOfLines={1}
-            >
-                {PublicName}
-            </Text>
-            <Text
-                style={[
-                    theme.textVariants.sm,
-                    { opacity: 0.7, fontSize: 12, marginTop: 10 },
-                ]}
-            >
-                {location}
-            </Text>
+            <Text numberOfLines={1}>{PublicName}</Text>
+            <Text type="paragraph">{location}</Text>
             <StarButton service={service} size={20} />
         </Pressable>
     );
@@ -94,20 +80,28 @@ const ServiceItem = ({ service }: Props) => {
 const styles = StyleSheet.create({
     container: {
         width: "100%",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
         padding: theme.spacing.lg,
         paddingRight: 40,
         marginBottom: theme.spacing.lg,
         borderRadius: 5,
         borderWidth: 1,
-        borderColor: "#ccc",
+        borderColor: theme.colors.border,
+        height: 80,
     },
     skeletonContainer: {
         width: "100%",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
         padding: theme.spacing.lg,
         marginBottom: theme.spacing.lg,
         borderRadius: 5,
         borderWidth: 1,
-        borderColor: "#ccc",
+        borderColor: theme.colors.border,
+        height: 80,
     },
     skeleton: {
         width: "100%",

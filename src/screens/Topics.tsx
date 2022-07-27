@@ -1,20 +1,14 @@
 import TopicIcon from "@components/TopicIcon";
+import Text from "@components/ui/Text";
 import TopicList from "@constants/TopicList";
 import theme from "@constants/theme";
 import React from "react";
-import { View, StyleSheet, ScrollView, Text } from "react-native";
+import { View, StyleSheet, ScrollView } from "react-native";
 
 const Topics = () => {
     return (
         <ScrollView style={{ paddingHorizontal: theme.spacing.lg }}>
-            <Text
-                style={[
-                    theme.textVariants.screenTitle,
-                    { textAlign: "center" },
-                ]}
-            >
-                Topics
-            </Text>
+            <Text type="title">Topics</Text>
             <View style={styles.container}>
                 {TopicList.map((topic, index) => (
                     <TopicIcon key={index} {...topic} />

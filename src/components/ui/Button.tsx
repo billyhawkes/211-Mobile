@@ -1,4 +1,4 @@
-import theme from "@constants/theme";
+import theme, { Theme } from "@constants/theme";
 import React from "react";
 import {
     Pressable,
@@ -11,8 +11,8 @@ import {
 type Props = {
     onPress: () => void;
     primary?: boolean;
-    size?: "sm" | "md" | "lg";
-    children: JSX.Element | string;
+    size?: keyof Theme["spacing"];
+    children: React.ReactNode;
     style?: StyleProp<ViewStyle>;
 };
 
@@ -35,7 +35,7 @@ const Button = ({
     const text = [
         styles.text,
         primary ? styles.primaryText : styles.ghostText,
-        theme.textVariants[size],
+        theme.textVariants["default"],
     ];
 
     return (

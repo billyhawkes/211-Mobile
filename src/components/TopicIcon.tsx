@@ -1,8 +1,9 @@
+import Text from "@components/ui/Text";
 import theme from "@constants/theme";
 import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { View, StyleSheet, Text, Pressable } from "react-native";
+import { View, StyleSheet, Pressable } from "react-native";
 
 import { ScreenProps } from "./Navigation";
 
@@ -19,7 +20,7 @@ const TopicIcon = ({ name, icon }: TopicIconType) => {
             onPress={() => navigation.navigate("Topic", { name })}
         >
             <View style={styles.icon}>{icon}</View>
-            <Text style={[theme.textVariants.md, styles.text]}>{name}</Text>
+            <Text style={{ marginTop: theme.spacing.sm }}>{name}</Text>
         </Pressable>
     );
 };
@@ -37,12 +38,8 @@ const styles = StyleSheet.create({
         padding: theme.spacing.lg,
         width: "100%",
         borderWidth: 1,
-        borderColor: "#aaa",
+        borderColor: theme.colors.border,
         borderRadius: 5,
-    },
-    text: {
-        marginTop: theme.spacing.sm,
-        textAlign: "center",
     },
 });
 

@@ -7,6 +7,7 @@ import {
 } from "@react-navigation/drawer";
 import {
     DefaultTheme,
+    DarkTheme,
     NavigationContainer,
     RouteProp,
 } from "@react-navigation/native";
@@ -18,7 +19,7 @@ import Topic from "@screens/Topic";
 import Topics from "@screens/Topics";
 import { ServiceRecord } from "@typesGlobal/service";
 import React from "react";
-import { Pressable } from "react-native";
+import { Pressable, useColorScheme } from "react-native";
 
 export const mainOptions:
     | DrawerNavigationOptions
@@ -95,17 +96,22 @@ export type ScreenProps = {
 
 export const Drawer = createDrawerNavigator<ScreenProps>();
 
+const CustomTheme = {
+    ...DefaultTheme,
+    colors: {
+        ...DefaultTheme.colors,
+        primary: theme.colors.primary,
+        text: theme.colors.text,
+        background: theme.colors.background,
+        border: theme.colors.border,
+    },
+};
+
 const Navigation = () => {
+    const scheme = useColorScheme();
     return (
         <NavigationContainer
-            theme={{
-                ...DefaultTheme,
-                colors: {
-                    ...DefaultTheme.colors,
-                    primary: theme.colors.primary,
-                    background: theme.colors.background,
-                },
-            }}
+            theme={scheme === "dark" ? DarkTheme : CustomTheme}
         >
             <Drawer.Navigator
                 useLegacyImplementation

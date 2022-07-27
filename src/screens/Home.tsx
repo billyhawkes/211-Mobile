@@ -1,9 +1,10 @@
 import HomeImage from "@assets/svg/home-image-undraw.svg";
-import Button from "@components/Button";
 import { ScreenProps } from "@components/Navigation";
 import ServiceItem from "@components/ServiceItem";
 import { Empty, ErrorFound, Loading } from "@components/ServiceState";
 import TopicIcon from "@components/TopicIcon";
+import Button from "@components/ui/Button";
+import Text from "@components/ui/Text";
 import TopicList from "@constants/TopicList";
 import theme from "@constants/theme";
 import { EMAIL_211_LINK, PHONE_211_NUMBER } from "@env";
@@ -12,7 +13,7 @@ import useLinkOut from "@hooks/useLinkOut";
 import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { ScrollView, View, StyleSheet, Text } from "react-native";
+import { ScrollView, View, StyleSheet } from "react-native";
 
 const Home = () => {
     const navigation = useNavigation<DrawerNavigationProp<ScreenProps>>();
@@ -47,7 +48,7 @@ const Home = () => {
             </View>
             {/* TOPIC SECTION */}
             <View style={styles.sectionHeader}>
-                <Text style={theme.textVariants.lg}>Topics</Text>
+                <Text type="header">Topics</Text>
                 <Button size="sm" onPress={() => navigation.navigate("Topics")}>
                     VIEW MORE
                 </Button>
@@ -60,7 +61,7 @@ const Home = () => {
             {/* FAVOURTIES SECTION */}
             <View style={{ marginBottom: theme.spacing.lg }}>
                 <View style={styles.sectionHeader}>
-                    <Text style={theme.textVariants.lg}>Favourites</Text>
+                    <Text type="header">Favourites</Text>
                     <Button
                         size="sm"
                         onPress={() => navigation.navigate("Favourites")}

@@ -1,18 +1,21 @@
 import { ScreenProps } from "@components/Navigation";
 import StarButton from "@components/StarButton";
+import Text from "@components/ui/Text";
 import theme from "@constants/theme";
 import { FontAwesome5 } from "@expo/vector-icons";
 import useLinkOut from "@hooks/useLinkOut";
 import { DrawerScreenProps } from "@react-navigation/drawer";
 import React, { useEffect } from "react";
-import { Pressable, ScrollView, Text, View, StyleSheet } from "react-native";
+import { Pressable, ScrollView, View, StyleSheet } from "react-native";
 
 const InfoSection = ({ title, text }: { title: string; text: string }) => {
     return (
         <>
-            <Text style={[theme.textVariants.lg, styles.header]}>{title}</Text>
+            <Text type="header" style={styles.header}>
+                {title}
+            </Text>
             <View style={styles.outerContainer}>
-                <Text style={theme.textVariants.md}>{text}</Text>
+                <Text>{text}</Text>
             </View>
         </>
     );
@@ -30,23 +33,21 @@ const LinkSection = ({ link, title, icon, hr, onPress }: LinkSectionProps) => {
     return (
         <>
             {hr ? <View style={styles.innerBreak} /> : null}
-            <Pressable style={[styles.linkContainer]} onPress={onPress}>
-                <View style={{ marginRight: theme.spacing.md }}>{icon}</View>
+            <Pressable style={styles.linkContainer} onPress={onPress}>
+                <View style={{ marginRight: theme.spacing.md, width: 25 }}>
+                    {icon}
+                </View>
                 {title ? (
                     <Text
-                        style={[theme.textVariants.md, { fontWeight: "bold" }]}
+                        style={{
+                            fontWeight: "bold",
+                            marginRight: 4,
+                        }}
                     >
                         {title}:
                     </Text>
                 ) : null}
-                <Text
-                    style={[
-                        theme.textVariants.md,
-                        styles.link,
-                        { marginLeft: 4 },
-                    ]}
-                    numberOfLines={1}
-                >
+                <Text type="link" numberOfLines={1} style={{ flex: 1 }}>
                     {link}
                 </Text>
             </Pressable>
@@ -86,11 +87,8 @@ const Service = ({
     return (
         <ScrollView style={{ paddingHorizontal: theme.spacing.lg }}>
             <Text
-                style={[
-                    theme.textVariants.lg,
-                    styles.header,
-                    { marginTop: theme.spacing.lg },
-                ]}
+                type="header"
+                style={[styles.header, { marginTop: theme.spacing.lg }]}
             >
                 {PublicName}
             </Text>
@@ -158,6 +156,7 @@ const Service = ({
                     <InfoSection title={"Last Updated"} text={UpdatedOn} />
                 ) : null}
             </>
+            <View style={{ marginTop: theme.spacing.lg }}></View>
         </ScrollView>
     );
 };
@@ -170,10 +169,9 @@ const styles = StyleSheet.create({
     outerContainer: {
         width: "100%",
         borderWidth: 1,
-        borderColor: "#ccc",
+        borderColor: theme.colors.border,
         borderTopWidth: 0,
         padding: theme.spacing.lg,
-        marginBottom: theme.spacing.lg,
         borderBottomRightRadius: 5,
         borderBottomLeftRadius: 5,
     },
@@ -183,18 +181,14 @@ const styles = StyleSheet.create({
         paddingHorizontal: theme.spacing.lg,
         backgroundColor: theme.colors.primary,
         color: "#ffffff",
-        fontWeight: "bold",
         borderTopLeftRadius: 5,
         borderTopRightRadius: 5,
+        marginTop: theme.spacing.lg,
     },
     innerBreak: {
         marginHorizontal: -15,
         borderTopWidth: 1,
-        borderColor: "#ccc",
-    },
-    link: {
-        color: theme.colors.link,
-        textDecorationLine: "underline",
+        borderColor: theme.colors.border,
     },
     linkContainer: {
         display: "flex",

@@ -3,11 +3,12 @@ import ErrorImage from "@assets/svg/error-undraw.svg";
 import NotFoundImage from "@assets/svg/not-found-undraw.svg";
 import WaitingToSearchImage from "@assets/svg/waiting-to-search-undraw.svg";
 import { ServiceItemSkeleton } from "@components/ServiceItem";
+import Text from "@components/ui/Text";
 import theme from "@constants/theme";
 import { PHONE_211_NUMBER } from "@env";
 import useLinkOut from "@hooks/useLinkOut";
 import React from "react";
-import { Text, StyleSheet, Pressable, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 
 export const Loading = ({ skeletons }: { skeletons: number }) => {
     return (
@@ -22,62 +23,54 @@ export const Loading = ({ skeletons }: { skeletons: number }) => {
 export const NotFound = () => {
     const { call } = useLinkOut();
     return (
-        <>
-            <NotFoundImage width="100%" height={120} style={styles.image} />
+        <View style={styles.container}>
+            <NotFoundImage height={120} />
             <View style={styles.noResultsContainer}>
-                <Text
-                    style={[
-                        theme.textVariants.md,
-                        styles.text,
-                        { marginTop: 0 },
-                    ]}
-                >
-                    No results found.
+                <Text type="paragraph">No results found.</Text>
+                <Text type="link" onPress={() => call(PHONE_211_NUMBER)}>
+                    Try Calling!
                 </Text>
-                <Pressable onPress={() => call(PHONE_211_NUMBER)}>
-                    <Text style={[theme.textVariants.md, styles.link]}>
-                        Try Calling!
-                    </Text>
-                </Pressable>
             </View>
-        </>
+        </View>
     );
 };
 
 export const ErrorFound = () => (
-    <>
-        <ErrorImage width="100%" height={120} style={styles.image} />
-        <Text style={[theme.textVariants.md, styles.text]}>
+    <View style={styles.container}>
+        <ErrorImage height={120} />
+        <Text type="paragraph" style={styles.text}>
             Error. Please try again.
         </Text>
-    </>
+    </View>
 );
 
 export const Idle = () => (
-    <>
-        <WaitingToSearchImage width="100%" height={120} style={styles.image} />
-        <Text style={[theme.textVariants.md, styles.text]}>
+    <View style={styles.container}>
+        <WaitingToSearchImage height={120} />
+        <Text type="paragraph" style={styles.text}>
             Waiting to search!
         </Text>
-    </>
+    </View>
 );
 
 export const Empty = ({ title }: { title: string }) => (
-    <>
-        <EmptyImage width="100%" height={120} style={styles.image} />
-        <Text style={[theme.textVariants.md, styles.text]}>{title}</Text>
-    </>
+    <View style={styles.container}>
+        <EmptyImage height={120} />
+        <Text type="paragraph" style={styles.text}>
+            {title}
+        </Text>
+    </View>
 );
 
 const styles = StyleSheet.create({
-    text: { opacity: 0.7, textAlign: "center", marginTop: theme.spacing.xl },
-    image: { marginTop: theme.spacing.xl },
-    link: {
-        textDecorationLine: "underline",
-        color: theme.colors.link,
-        textAlign: "center",
-        paddingVertical: theme.spacing.md,
-        paddingHorizontal: theme.spacing.sm,
+    container: {
+        marginTop: theme.spacing.xl,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    text: {
+        marginTop: theme.spacing.sm,
     },
     noResultsContainer: {
         display: "flex",
