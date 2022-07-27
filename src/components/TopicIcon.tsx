@@ -1,9 +1,10 @@
 import theme from "@constants/theme";
-import { ScreenProps } from "@features/navigation";
 import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { View, StyleSheet, Text, Pressable } from "react-native";
+
+import { ScreenProps } from "./Navigation";
 
 export type TopicIconType = {
     name: string;
@@ -28,19 +29,19 @@ const styles = StyleSheet.create({
         width: "30%",
         display: "flex",
         alignItems: "center",
-        marginBottom: 15,
+        marginBottom: theme.spacing.lg,
     },
     icon: {
         display: "flex",
         alignItems: "center",
-        padding: 15,
+        padding: theme.spacing.lg,
         width: "100%",
         borderWidth: 1,
         borderColor: "#aaa",
         borderRadius: 5,
     },
     text: {
-        marginTop: 5,
+        marginTop: theme.spacing.sm,
         textAlign: "center",
     },
 });

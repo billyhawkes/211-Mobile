@@ -1,7 +1,7 @@
 import "react-native-gesture-handler";
+import Navigation from "@components/Navigation";
 import { SENTRY_DSN, SENTRY_DEBUG } from "@env";
 import { Lato_400Regular } from "@expo-google-fonts/lato";
-import { Navigation } from "@features/navigation";
 import useLocation from "@hooks/useLocation";
 import { registerRootComponent } from "expo";
 import * as Font from "expo-font";

@@ -1,9 +1,9 @@
-import ScreenTitle from "@components/ScreenTitle";
-import ServiceList from "@components/ServiceList";
+import ServiceItem from "@components/ServiceItem";
+import { ErrorFound, Idle, Loading, NotFound } from "@components/ServiceState";
 import theme from "@constants/theme";
+import { API_URL } from "@env";
 import { FontAwesome5 } from "@expo/vector-icons";
-import { SearchState, useSearch } from "@features/search";
-import useLocation from "@hooks/useLocation";
+import useLocation, { UserLocation } from "@hooks/useLocation";
 import Slider from "@react-native-community/slider";
 import { Picker } from "@react-native-picker/picker";
 import {
@@ -12,6 +12,7 @@ import {
     DrawerContentScrollView,
     DrawerScreenProps,
 } from "@react-navigation/drawer";
+import { ServiceResponse, ServiceResponseSchema } from "@typesGlobal/service";
 import React from "react";
 import {
     useForm,
@@ -26,8 +27,40 @@ import {
     Pressable,
     View,
     Text,
+    FlatList,
 } from "react-native";
+import { useQuery } from "react-query";
 
+// SEARCH API
+const searchKeywordRequest = async (
+    keyword: string,
+    { lat, lng }: UserLocation,
+    { distance, sortType }: Filters
+): Promise<ServiceResponse> => {
+    const res = await fetch(`${API_URL}`, {
+        method: "Post",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            Dataset: "on",
+            Lang: "en",
+            SearchType: "proximity",
+            Latitude: lat,
+            Longitude: lng,
+            SortOrder: sortType,
+            Distance: distance,
+            Search: "term",
+            PageSize: 1000,
+            Term: keyword,
+        }),
+    });
+    const data: unknown = await res.json();
+    return ServiceResponseSchema.parse(data);
+};
+
+// TYPES
 export type Filters = {
     sortType: "best" | "distance" | "name";
     distance: number;
@@ -37,6 +70,12 @@ type FilterDrawerProps = {
     FilteredSearch: { filters: Filters };
 };
 
+type SearchForm = {
+    keyword: string;
+    filters: Filters;
+};
+
+// FILTERS DRAWER
 const FilterDrawer = createDrawerNavigator<FilterDrawerProps>();
 
 const FilterContent = (props: DrawerContentComponentProps) => {
@@ -49,7 +88,14 @@ const FilterContent = (props: DrawerContentComponentProps) => {
                 marginHorizontal: theme.spacing.lg,
             }}
         >
-            <ScreenTitle title="Refine" />
+            <Text
+                style={[
+                    theme.textVariants.screenTitle,
+                    { textAlign: "center" },
+                ]}
+            >
+                Refine
+            </Text>
             <Controller
                 control={control}
                 rules={{
@@ -104,11 +150,6 @@ const FilterContent = (props: DrawerContentComponentProps) => {
     );
 };
 
-type SearchForm = {
-    keyword: string;
-    filters: Filters;
-};
-
 const SearchNavigator = () => {
     const methods = useForm<SearchForm>({
         defaultValues: {
@@ -141,19 +182,31 @@ const SearchNavigator = () => {
     );
 };
 
+// SEARCH SCREEN
 const Search = ({
     route,
     navigation,
 }: DrawerScreenProps<FilterDrawerProps, "FilteredSearch">) => {
-    const { filters } = route.params;
+    const { filters: defaultFilters } = route.params;
     const { control, getValues } = useFormContext<SearchForm>();
-    const { useKeywordSearch } = useSearch();
     const { location, defaultLocation } = useLocation();
 
-    const { data, isLoading, isError, isIdle, refetch } = useKeywordSearch(
-        getValues("keyword"),
-        location ?? defaultLocation,
-        getValues("filters") ?? filters
+    const { keyword, filters } = getValues();
+    const { data, isLoading, isError, isIdle, refetch } = useQuery<
+        ServiceResponse,
+        unknown
+    >(
+        ["keyword", getValues(), location, filters],
+        () =>
+            searchKeywordRequest(
+                getValues("keyword"),
+                location ?? defaultLocation,
+                filters ?? defaultFilters
+            ),
+        {
+            cacheTime: 0,
+            enabled: keyword !== "",
+        }
     );
 
     const search = () => {
@@ -162,14 +215,21 @@ const Search = ({
 
     return (
         <SafeAreaView>
-            <ScreenTitle title="Search" />
+            <Text
+                style={[
+                    theme.textVariants.screenTitle,
+                    { textAlign: "center" },
+                ]}
+            >
+                Search
+            </Text>
             <View
                 style={{
                     display: "flex",
                     flexDirection: "row",
                     marginHorizontal: theme.spacing.lg,
                     alignItems: "center",
-                    marginBottom: 15,
+                    marginBottom: theme.spacing.lg,
                 }}
             >
                 <Controller
@@ -203,15 +263,21 @@ const Search = ({
                     <FontAwesome5 name="sliders-h" size={20} color="#777" />
                 </Pressable>
             </View>
-            <>{isLoading ? <SearchState state="loading" /> : null}</>
-            <>{isError ? <SearchState state="error" /> : null}</>
-            <>
-                {data && data.RecordCount === "0" ? (
-                    <SearchState state="not-found" />
-                ) : null}
-            </>
-            <>{isIdle ? <SearchState state="waiting-to-search" /> : null}</>
-            <>{data ? <ServiceList services={data.Records} /> : null}</>
+            {isLoading ? (
+                <Loading skeletons={10} />
+            ) : isError ? (
+                <ErrorFound />
+            ) : data && data.RecordCount === "0" ? (
+                <NotFound />
+            ) : isIdle ? (
+                <Idle />
+            ) : null}
+            {data ? (
+                <FlatList
+                    data={data.Records}
+                    renderItem={({ item }) => <ServiceItem service={item} />}
+                />
+            ) : null}
         </SafeAreaView>
     );
 };
@@ -222,7 +288,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         flex: 1,
         borderRadius: 5,
-        paddingHorizontal: 15,
+        paddingHorizontal: theme.spacing.lg,
         height: theme.spacing.xl2,
     },
     filterRow: {

@@ -1,7 +1,7 @@
+import { ScreenProps } from "@components/Navigation";
+import StarButton from "@components/StarButton";
 import theme from "@constants/theme";
 import { FontAwesome5 } from "@expo/vector-icons";
-import { StarButton } from "@features/favourites";
-import { ScreenProps } from "@features/navigation";
 import useLinkOut from "@hooks/useLinkOut";
 import { DrawerScreenProps } from "@react-navigation/drawer";
 import React, { useEffect } from "react";
@@ -10,9 +10,9 @@ import { Pressable, ScrollView, Text, View, StyleSheet } from "react-native";
 const InfoSection = ({ title, text }: { title: string; text: string }) => {
     return (
         <>
-            <Text style={[styles.header]}>{title}</Text>
+            <Text style={[theme.textVariants.lg, styles.header]}>{title}</Text>
             <View style={styles.outerContainer}>
-                <Text>{text}</Text>
+                <Text style={theme.textVariants.md}>{text}</Text>
             </View>
         </>
     );
@@ -33,10 +33,18 @@ const LinkSection = ({ link, title, icon, hr, onPress }: LinkSectionProps) => {
             <Pressable style={[styles.linkContainer]} onPress={onPress}>
                 <View style={{ marginRight: theme.spacing.md }}>{icon}</View>
                 {title ? (
-                    <Text style={{ fontWeight: "bold" }}>{title}:</Text>
+                    <Text
+                        style={[theme.textVariants.md, { fontWeight: "bold" }]}
+                    >
+                        {title}:
+                    </Text>
                 ) : null}
                 <Text
-                    style={[styles.link, { marginLeft: 4 }]}
+                    style={[
+                        theme.textVariants.md,
+                        styles.link,
+                        { marginLeft: 4 },
+                    ]}
                     numberOfLines={1}
                 >
                     {link}
@@ -77,7 +85,13 @@ const Service = ({
 
     return (
         <ScrollView style={{ paddingHorizontal: theme.spacing.lg }}>
-            <Text style={[styles.header, { marginTop: theme.spacing.lg }]}>
+            <Text
+                style={[
+                    theme.textVariants.lg,
+                    styles.header,
+                    { marginTop: theme.spacing.lg },
+                ]}
+            >
                 {PublicName}
             </Text>
             <View style={[styles.outerContainer, { paddingVertical: 0 }]}>
@@ -151,22 +165,22 @@ const Service = ({
 const styles = StyleSheet.create({
     centerContainer: {
         width: "100%",
-        padding: 15,
+        padding: theme.spacing.lg,
     },
     outerContainer: {
         width: "100%",
         borderWidth: 1,
         borderColor: "#ccc",
         borderTopWidth: 0,
-        padding: 15,
-        marginBottom: 15,
+        padding: theme.spacing.lg,
+        marginBottom: theme.spacing.lg,
         borderBottomRightRadius: 5,
         borderBottomLeftRadius: 5,
     },
     header: {
         width: "100%",
         paddingVertical: 10,
-        paddingHorizontal: 15,
+        paddingHorizontal: theme.spacing.lg,
         backgroundColor: theme.colors.primary,
         color: "#ffffff",
         fontWeight: "bold",
@@ -186,7 +200,7 @@ const styles = StyleSheet.create({
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
-        paddingVertical: 15,
+        paddingVertical: theme.spacing.lg,
     },
 });
 

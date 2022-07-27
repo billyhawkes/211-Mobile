@@ -1,13 +1,20 @@
-import ScreenTitle from "@components/ScreenTitle";
+import TopicIcon from "@components/TopicIcon";
+import TopicList from "@constants/TopicList";
 import theme from "@constants/theme";
-import { TopicIcon, TopicList } from "@features/search";
 import React from "react";
-import { View, StyleSheet, ScrollView } from "react-native";
+import { View, StyleSheet, ScrollView, Text } from "react-native";
 
 const Topics = () => {
     return (
         <ScrollView style={{ paddingHorizontal: theme.spacing.lg }}>
-            <ScreenTitle title="Topics" />
+            <Text
+                style={[
+                    theme.textVariants.screenTitle,
+                    { textAlign: "center" },
+                ]}
+            >
+                Topics
+            </Text>
             <View style={styles.container}>
                 {TopicList.map((topic, index) => (
                     <TopicIcon key={index} {...topic} />
@@ -20,7 +27,7 @@ const Topics = () => {
 
 const styles = StyleSheet.create({
     container: {
-        padding: 15,
+        padding: theme.spacing.lg,
         display: "flex",
         flexDirection: "row",
         flexWrap: "wrap",

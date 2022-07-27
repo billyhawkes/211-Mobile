@@ -35,13 +35,5 @@
         "react": {
             "version": "detect"
         }
-    },
-    "rules": {
-        "no-restricted-imports": [
-            "error",
-            {
-                "patterns": ["@features/*/*"]
-            }
-        ]
     }
 }

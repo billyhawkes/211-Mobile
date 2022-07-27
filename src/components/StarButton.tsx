@@ -1,12 +1,11 @@
 import { FontAwesome } from "@expo/vector-icons";
-import { Service } from "@typesGlobal/service";
+import useFavourites from "@hooks/useFavourites";
+import { ServiceRecord } from "@typesGlobal/service";
 import React from "react";
 import { Pressable, StyleSheet } from "react-native";
 
-import useFavourites from "../hooks/useFavourites";
-
 type Props = {
-    service: Service;
+    service: ServiceRecord;
     size: number;
 };
 

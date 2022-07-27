@@ -9,8 +9,7 @@
             "@hooks/*": ["./src/hooks/*"],
             "@assets/*": ["./src/assets/*"],
             "@screens/*": ["./src/screens/*"],
-            "@typesGlobal/*": ["./src/types/*"],
-            "@features/*": ["./src/features/*"]
+            "@typesGlobal/*": ["./src/types/*"]
         }
     },
     "include": ["src/**/*"]

@@ -1,8 +1,12 @@
 import theme from "@constants/theme";
-import { StarButton } from "@features/favourites";
-import { Service } from "@typesGlobal/service";
+import { DrawerNavigationProp } from "@react-navigation/drawer";
+import { useNavigation } from "@react-navigation/native";
+import { ServiceRecord } from "@typesGlobal/service";
 import React, { useEffect, useRef } from "react";
 import { View, Text, StyleSheet, Animated, Pressable } from "react-native";
+
+import { ScreenProps } from "./Navigation";
+import StarButton from "./StarButton";
 
 const useSkeleten = () => {
     const opacity = useRef(new Animated.Value(0.3)).current;
@@ -44,11 +48,10 @@ export const ServiceItemSkeleton = () => {
 };
 
 type Props = {
-    service: Service;
-    onPress: () => void;
+    service: ServiceRecord;
 };
 
-const ServiceItem = ({ service, onPress }: Props) => {
+const ServiceItem = ({ service }: Props) => {
     const {
         PublicName,
         PhysicalAddressStreet1,
@@ -56,13 +59,31 @@ const ServiceItem = ({ service, onPress }: Props) => {
         PhysicalAddressProvince,
     } = service;
     const location = `${PhysicalAddressStreet1} ${PhysicalAddressCity} ${PhysicalAddressProvince}`;
+    const navigation = useNavigation<DrawerNavigationProp<ScreenProps>>();
+
+    const navigateToServicePage = (service: ServiceRecord) => {
+        navigation.navigate("Service", {
+            service,
+        });
+    };
 
     return (
-        <Pressable onPress={onPress} style={styles.container}>
-            <Text style={[{ fontWeight: "bold" }]} numberOfLines={1}>
+        <Pressable
+            onPress={() => navigateToServicePage(service)}
+            style={styles.container}
+        >
+            <Text
+                style={[theme.textVariants.md, { fontWeight: "bold" }]}
+                numberOfLines={1}
+            >
                 {PublicName}
             </Text>
-            <Text style={[{ opacity: 0.7, fontSize: 12, marginTop: 10 }]}>
+            <Text
+                style={[
+                    theme.textVariants.sm,
+                    { opacity: 0.7, fontSize: 12, marginTop: 10 },
+                ]}
+            >
                 {location}
             </Text>
             <StarButton service={service} size={20} />
@@ -73,7 +94,7 @@ const ServiceItem = ({ service, onPress }: Props) => {
 const styles = StyleSheet.create({
     container: {
         width: "100%",
-        padding: 15,
+        padding: theme.spacing.lg,
         paddingRight: 40,
         marginBottom: theme.spacing.lg,
         borderRadius: 5,
@@ -82,15 +103,15 @@ const styles = StyleSheet.create({
     },
     skeletonContainer: {
         width: "100%",
-        padding: 20,
-        marginBottom: 15,
+        padding: theme.spacing.lg,
+        marginBottom: theme.spacing.lg,
         borderRadius: 5,
         borderWidth: 1,
         borderColor: "#ccc",
     },
     skeleton: {
         width: "100%",
-        height: 15,
+        height: theme.spacing.lg,
         backgroundColor: "#999",
         borderRadius: 5,
     },

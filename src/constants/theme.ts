@@ -28,6 +28,12 @@ const theme = {
             fontSize: 16,
             lineHeight: 24,
         },
+        screenTitle: {
+            fontFamily: "Lato",
+            fontSize: 16,
+            lineHeight: 24,
+            marginVertical: 16,
+        },
     },
 };
 

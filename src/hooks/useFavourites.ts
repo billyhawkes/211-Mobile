@@ -1,24 +1,24 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Service, ServiceSchema } from "@typesGlobal/service";
+import { ServiceRecord, ServiceSchema } from "@typesGlobal/service";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
-const getFavourites = async (): Promise<Service[]> => {
+const getFavourites = async (): Promise<ServiceRecord[]> => {
     const json = await AsyncStorage.getItem("favourites");
     const jsonValue: unknown = json != null ? JSON.parse(json) : [];
     return ServiceSchema.array().parse(jsonValue);
 };
 
-const addFavourite = async (service: Service) => {
+const addFavourite = async (service: ServiceRecord) => {
     const favourites = await getFavourites();
     const newFavourites = JSON.stringify([...favourites, service]);
     await AsyncStorage.setItem("favourites", newFavourites);
     return service;
 };
 
-const removeFavourite = async (service: Service) => {
+const removeFavourite = async (service: ServiceRecord) => {
     const favourites = await getFavourites();
     const newFavourites = JSON.stringify(
-        favourites.filter((s: Service) => s.id !== service.id)
+        favourites.filter((s: ServiceRecord) => s.id !== service.id)
     );
     await AsyncStorage.setItem("favourites", newFavourites);
     return service;
@@ -31,7 +31,7 @@ const useFavourites = () => {
 
     const useAddFavourite = useMutation(addFavourite, {
         onSuccess: (service) => {
-            queryClient.setQueryData<Service[]>(
+            queryClient.setQueryData<ServiceRecord[]>(
                 "favourites",
                 (currentFavourites) =>
                     currentFavourites
@@ -43,7 +43,7 @@ const useFavourites = () => {
 
     const useRemoveFavourite = useMutation(removeFavourite, {
         onSuccess: (removedService) => {
-            queryClient.setQueryData<Service[]>(
+            queryClient.setQueryData<ServiceRecord[]>(
                 "favourites",
                 (currentFavourites) =>
                     currentFavourites
@@ -56,9 +56,12 @@ const useFavourites = () => {
     });
 
     const isFavourite = (id: number) => {
-        const favourites = queryClient.getQueryData<Service[]>("favourites");
+        const favourites =
+            queryClient.getQueryData<ServiceRecord[]>("favourites");
         return favourites
-            ? !!favourites.find((favourite: Service) => favourite.id === id)
+            ? !!favourites.find(
+                  (favourite: ServiceRecord) => favourite.id === id
+              )
             : false;
     };
 

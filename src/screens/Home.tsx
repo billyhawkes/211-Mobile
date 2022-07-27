@@ -1,10 +1,13 @@
 import HomeImage from "@assets/svg/home-image-undraw.svg";
 import Button from "@components/Button";
+import { ScreenProps } from "@components/Navigation";
+import ServiceItem from "@components/ServiceItem";
+import { Empty, ErrorFound, Loading } from "@components/ServiceState";
+import TopicIcon from "@components/TopicIcon";
+import TopicList from "@constants/TopicList";
 import theme from "@constants/theme";
 import { EMAIL_211_LINK, PHONE_211_NUMBER } from "@env";
-import { FavouritesList } from "@features/favourites";
-import { ScreenProps } from "@features/navigation";
-import { TopicIcon, TopicList } from "@features/search";
+import useFavourites from "@hooks/useFavourites";
 import useLinkOut from "@hooks/useLinkOut";
 import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { useNavigation } from "@react-navigation/native";
@@ -14,11 +17,18 @@ import { ScrollView, View, StyleSheet, Text } from "react-native";
 const Home = () => {
     const navigation = useNavigation<DrawerNavigationProp<ScreenProps>>();
     const { call, email } = useLinkOut();
+    const { useFindFavourites } = useFavourites();
+    const { data: favourites, isLoading, isError } = useFindFavourites;
 
     return (
         <ScrollView style={{ paddingHorizontal: theme.spacing.lg }}>
-            <HomeImage width="100%" height={210} style={{ marginTop: 15 }} />
+            <HomeImage
+                width="100%"
+                height={210}
+                style={{ marginTop: theme.spacing.lg }}
+            />
             <View style={styles.imageUnderline} />
+            {/* CONTACT SECTION */}
             <View style={styles.contactContainer}>
                 <Button
                     primary
@@ -35,6 +45,7 @@ const Home = () => {
                     EMAIL US
                 </Button>
             </View>
+            {/* TOPIC SECTION */}
             <View style={styles.sectionHeader}>
                 <Text style={theme.textVariants.lg}>Topics</Text>
                 <Button size="sm" onPress={() => navigation.navigate("Topics")}>
@@ -46,16 +57,32 @@ const Home = () => {
                     <TopicIcon key={index} {...topic} />
                 ))}
             </View>
-            <View style={styles.sectionHeader}>
-                <Text style={theme.textVariants.lg}>Favourites</Text>
-                <Button
-                    size="sm"
-                    onPress={() => navigation.navigate("Favourites")}
-                >
-                    VIEW MORE
-                </Button>
+            {/* FAVOURTIES SECTION */}
+            <View style={{ marginBottom: theme.spacing.lg }}>
+                <View style={styles.sectionHeader}>
+                    <Text style={theme.textVariants.lg}>Favourites</Text>
+                    <Button
+                        size="sm"
+                        onPress={() => navigation.navigate("Favourites")}
+                    >
+                        VIEW MORE
+                    </Button>
+                </View>
+                {isLoading ? (
+                    <Loading skeletons={2} />
+                ) : isError ? (
+                    <ErrorFound />
+                ) : favourites && favourites.length === 0 ? (
+                    <Empty title="No favourites yet!" />
+                ) : null}
+                {favourites
+                    ? favourites
+                          .slice(0, 2)
+                          .map((service) => (
+                              <ServiceItem key={service.id} service={service} />
+                          ))
+                    : null}
             </View>
-            <FavouritesList limit={2} />
         </ScrollView>
     );
 };
@@ -73,7 +100,7 @@ const styles = StyleSheet.create({
         width: "100%",
         display: "flex",
         flexDirection: "row",
-        marginVertical: 15,
+        marginVertical: theme.spacing.lg,
         justifyContent: "space-between",
     },
     sectionHeader: {

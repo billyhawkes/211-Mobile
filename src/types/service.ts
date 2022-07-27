@@ -43,4 +43,11 @@ export const ServiceSchema = z.object({
     Website: z.string().url().nullable(),
 });
 
-export type Service = z.infer<typeof ServiceSchema>;
+export type ServiceRecord = z.infer<typeof ServiceSchema>;
+
+export const ServiceResponseSchema = z.object({
+    RecordCount: z.string(),
+    Records: ServiceSchema.array(),
+});
+
+export type ServiceResponse = z.infer<typeof ServiceResponseSchema>;
