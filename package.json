@@ -18,7 +18,9 @@
     "dependencies": {
         "@expo-google-fonts/lato": "^0.2.2",
         "@expo/vector-icons": "^13.0.0",
+        "@hookform/resolvers": "^2.9.7",
         "@react-native-async-storage/async-storage": "~1.17.3",
+        "@react-native-community/slider": "4.2.1",
         "@react-native-picker/picker": "2.4.0",
         "@react-navigation/drawer": "^6.4.1",
         "@react-navigation/native": "^6.0.10",
@@ -49,8 +51,7 @@
         "react-native-web": "0.17.7",
         "react-query": "^3.39.1",
         "sentry-expo": "^4.2.0",
-        "zod": "^3.17.9",
-        "@react-native-community/slider": "4.2.1"
+        "zod": "^3.17.9"
     },
     "devDependencies": {
         "@babel/core": "^7.12.9",

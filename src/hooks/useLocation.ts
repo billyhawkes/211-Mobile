@@ -1,10 +1,6 @@
+import { UserLocation } from "@typesGlobal/location";
 import * as Location from "expo-location";
 import { useEffect, useState } from "react";
-
-export type UserLocation = {
-    lat: number;
-    lng: number;
-};
 
 const useLocation = () => {
     const defaultLocation = {

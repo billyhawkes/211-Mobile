@@ -4,7 +4,8 @@ import Text from "@components/ui/Text";
 import theme from "@constants/theme";
 import { API_URL } from "@env";
 import { FontAwesome5 } from "@expo/vector-icons";
-import useLocation, { UserLocation } from "@hooks/useLocation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import useLocation from "@hooks/useLocation";
 import Slider from "@react-native-community/slider";
 import { Picker } from "@react-native-picker/picker";
 import {
@@ -13,6 +14,7 @@ import {
     DrawerContentScrollView,
     DrawerScreenProps,
 } from "@react-navigation/drawer";
+import { UserLocationSchema } from "@typesGlobal/location";
 import { ServiceResponse, ServiceResponseSchema } from "@typesGlobal/service";
 import React from "react";
 import {
@@ -29,14 +31,27 @@ import {
     View,
     FlatList,
 } from "react-native";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
+import { z } from "zod";
+
+// TYPES
+const SearchInputSchema = z.object({
+    keyword: z.string(),
+    filters: z.object({
+        sortType: z.string(),
+        distance: z.number().int().gte(1).lte(100),
+    }),
+    location: UserLocationSchema,
+});
+
+export type SearchInput = z.infer<typeof SearchInputSchema>;
 
 // SEARCH API
-const searchKeywordRequest = async (
-    keyword: string,
-    { lat, lng }: UserLocation,
-    { distance, sortType }: Filters
-): Promise<ServiceResponse> => {
+const searchKeywordRequest = async ({
+    keyword,
+    location,
+    filters,
+}: SearchInput): Promise<ServiceResponse> => {
     const res = await fetch(`${API_URL}`, {
         method: "Post",
         headers: {
@@ -47,10 +62,10 @@ const searchKeywordRequest = async (
             Dataset: "on",
             Lang: "en",
             SearchType: "proximity",
-            Latitude: lat,
-            Longitude: lng,
-            SortOrder: sortType,
-            Distance: distance,
+            Latitude: location.lat,
+            Longitude: location.lng,
+            SortOrder: filters.sortType,
+            Distance: filters.distance,
             Search: "term",
             PageSize: 1000,
             Term: keyword,
@@ -60,26 +75,44 @@ const searchKeywordRequest = async (
     return ServiceResponseSchema.parse(data);
 };
 
-// TYPES
-export type Filters = {
-    sortType: "best" | "distance" | "name";
-    distance: number;
-};
+const SearchNavigator = () => {
+    const { location, defaultLocation } = useLocation();
+    const methods = useForm<SearchInput>({
+        resolver: zodResolver(SearchInputSchema),
+        defaultValues: {
+            keyword: "",
+            filters: {
+                sortType: "best",
+                distance: 100,
+            },
+            location: location ?? defaultLocation,
+        },
+    });
 
-type FilterDrawerProps = {
-    FilteredSearch: { filters: Filters };
-};
-
-type SearchForm = {
-    keyword: string;
-    filters: Filters;
+    return (
+        <FormProvider {...methods}>
+            <FilterDrawer.Navigator
+                screenOptions={{ drawerPosition: "right", headerShown: false }}
+                drawerContent={(props) => <FilterContent {...props} />}
+            >
+                <FilterDrawer.Screen name="FilteredSearch" component={Search} />
+            </FilterDrawer.Navigator>
+        </FormProvider>
+    );
 };
 
 // FILTERS DRAWER
-const FilterDrawer = createDrawerNavigator<FilterDrawerProps>();
+const FilterDrawer = createDrawerNavigator<{ FilteredSearch: undefined }>();
 
 const FilterContent = (props: DrawerContentComponentProps) => {
-    const { control, setValue } = useFormContext<SearchForm>();
+    const { control, setValue, getValues } = useFormContext<SearchInput>();
+    const queryClient = useQueryClient();
+
+    const search = () => {
+        queryClient
+            .refetchQueries("search")
+            .catch(() => console.error("Error"));
+    };
 
     return (
         <DrawerContentScrollView
@@ -103,6 +136,7 @@ const FilterContent = (props: DrawerContentComponentProps) => {
                             selectedValue={value}
                             onValueChange={(itemValue) => {
                                 setValue("filters.sortType", itemValue);
+                                search();
                             }}
                             mode="dropdown"
                         >
@@ -155,9 +189,10 @@ const FilterContent = (props: DrawerContentComponentProps) => {
                                 step={1}
                                 maximumTrackTintColor="#aaa"
                                 value={value}
-                                onSlidingComplete={(value) =>
-                                    setValue("filters.distance", value)
-                                }
+                                onSlidingComplete={(value) => {
+                                    setValue("filters.distance", value);
+                                    search();
+                                }}
                             />
                             <Text>{value} km</Text>
                         </View>
@@ -165,68 +200,31 @@ const FilterContent = (props: DrawerContentComponentProps) => {
                 )}
                 name="filters.distance"
             />
+            <View style={styles.filterRow}>
+                <Text>Location</Text>
+                <View>
+                    <Text>lat: {getValues("location.lat")}</Text>
+                    <Text>lng: {getValues("location.lng")}</Text>
+                </View>
+            </View>
         </DrawerContentScrollView>
-    );
-};
-
-const SearchNavigator = () => {
-    const methods = useForm<SearchForm>({
-        defaultValues: {
-            keyword: "",
-            filters: {
-                sortType: "best",
-                distance: 100,
-            },
-        },
-    });
-
-    return (
-        <FormProvider {...methods}>
-            <FilterDrawer.Navigator
-                screenOptions={{ drawerPosition: "right", headerShown: false }}
-                drawerContent={(props) => <FilterContent {...props} />}
-            >
-                <FilterDrawer.Screen
-                    name="FilteredSearch"
-                    initialParams={{
-                        filters: {
-                            distance: 100,
-                            sortType: "best",
-                        },
-                    }}
-                    component={Search}
-                />
-            </FilterDrawer.Navigator>
-        </FormProvider>
     );
 };
 
 // SEARCH SCREEN
 const Search = ({
-    route,
     navigation,
-}: DrawerScreenProps<FilterDrawerProps, "FilteredSearch">) => {
-    const { filters: defaultFilters } = route.params;
-    const { control, getValues } = useFormContext<SearchForm>();
-    const { location, defaultLocation } = useLocation();
+}: DrawerScreenProps<{ FilteredSearch: undefined }, "FilteredSearch">) => {
+    const { control, getValues } = useFormContext<SearchInput>();
 
-    const { keyword, filters } = getValues();
+    const values = getValues();
     const { data, isLoading, isError, isIdle, refetch } = useQuery<
         ServiceResponse,
         unknown
-    >(
-        ["keyword", getValues(), location, filters],
-        () =>
-            searchKeywordRequest(
-                getValues("keyword"),
-                location ?? defaultLocation,
-                filters ?? defaultFilters
-            ),
-        {
-            cacheTime: 0,
-            enabled: keyword !== "",
-        }
-    );
+    >(["search", values], () => searchKeywordRequest(values), {
+        cacheTime: 0,
+        enabled: !!values.keyword && values.keyword !== "",
+    });
 
     const search = () => {
         refetch().catch(() => console.error("Failed to refetch."));
